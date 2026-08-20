@@ -19,3 +19,10 @@
 - [x] Create and verify the schema-free Supabase project named agri-guard in the Hackathons organization.
 - [x] Write the AgriGuard PRD in the repository documentation.
 - [x] Write the detailed implementation plan outside the public repository.
+- [x] Provide current Supabase credential-retrieval steps for the agri-guard project.
+- [ ] Build a swappable temperature-data adapter that uses clearly labeled synthetic demo data until FortyGuard API access is available.
+- [x] Complete the pre-build research package, asset discovery, dependency validation, and finalized visual system before writing product code.
+- [x] Select and document one lightweight public Spline community hero element or two small complementary elements, including its public embed details and performance fallback.
+- [x] Verify and prepare the approved public Spline Code scene at https://prod.spline.design/uVqm7hH8m0iJQ5iX/scene.splinecode for the landing hero.
+- [x] Select and download one suitable Pexels landing-page video, including its source URL and intended responsive use.
+- [x] Use the AI Orb and grid loader for agent monitoring and evidence generation only; do not add a chat panel or prompt input.
