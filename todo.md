@@ -34,3 +34,7 @@
 - [x] Assess and implement only a non-blocking preloader if it improves the first visit without delaying the landing hero.
 - [x] Replace the branded public Spline hero with a branded Magic UI Globe and static signal fallback.
 - [x] Add the selected landing-only enhancements: a reduced-motion-safe smooth cursor, a small policy ripple, and a three-item motion FAQ.
+- [x] Assess the supplied cloud shader against the existing AgriGuard hero, performance budget, and visual system; integrate it only if it improves the page. Decision: retain the branded globe because a second full-frame WebGL surface would compete with the focused climate-signal hero and add avoidable GPU work.
+- [x] Compare the supplied motion FAQ accordion with the existing implementation and retain only any material accessibility or interaction improvement. Applied explicit question-panel ARIA relationships and reduced-motion-safe transitions.
+- [x] Complete the frontend verification and pause the live FortyGuard integration until an API key is available. The official API contract and required server-only key are documented in `docs/FORTYGUARD_API_INTEGRATION_NOTES.md`.
+- [x] Add route-level code splitting so map, chart, and globe code load only when their corresponding AgriGuard screen is opened.
