@@ -1,0 +1,22 @@
+# Project TODO
+
+- [x] Create the AgriGuard product foundation and repository documentation without adding the implementation plan to the repository.
+- [ ] Configure Supabase client support for the agri-guard project without applying the application database schema yet.
+- [ ] Add a portfolio dashboard with a Leaflet and OpenStreetMap field map, a list view, and Safe, Watch, Triggered, and Data unavailable states.
+- [ ] Add a field-detail view with Recharts temperature and heat-score charts, a 34 °C threshold marker, and highlighted qualifying readings.
+- [ ] Implement the deterministic heat policy engine with a 34 °C threshold, a three-hour continuous-duration rule, flowering or grain-filling checks, and 25%, 50%, and 100% simulated payout bands.
+- [ ] Implement a Groq tool-calling monitoring agent that reads field data, invokes the policy engine, records evidence, and writes a plain-English explanation.
+- [ ] Add a structured fallback report that has the same shape as the Groq-generated explanation.
+- [ ] Add an evidence-record view with observations, threshold, exposure hours, heat score, payout band, simulated amount, data-source label, and explanation.
+- [ ] Add a simulated payout ledger with field, date, payout band, amount, Reviewed and Recorded statuses, and visible simulated-payout disclaimers.
+- [ ] Add a heat-wave demo control that creates fixed synthetic readings and labels every affected view as Synthetic demo data.
+- [ ] Integrate FortyGuard temperature data as the primary observation source and store observations in Supabase.
+- [ ] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
+- [ ] Enforce duplicate payout prevention in the database and policy engine.
+- [ ] Add missing or stale-data handling, including a Data unavailable state.
+- [ ] Add unit tests for policy rules, duplicate prevention, and fallback-report shape.
+- [ ] Verify the finished UI on desktop and mobile, validate the main demo flow, and prepare the Vercel deployment configuration.
+- [x] Create and verify the schema-free Supabase project named agri-guard in the Hackathons organization.
+- [x] Write the AgriGuard PRD in the repository documentation.
+- [x] Write the detailed implementation plan outside the public repository.
+***
