@@ -43,5 +43,5 @@ describe.skipIf(!groqApiKey)("Groq configuration", () => {
     expect(response.status).not.toBe(401);
     expect(response.status).not.toBe(403);
     expect(response.status).toBeLessThan(500);
-  });
+  }, 15000);
 });

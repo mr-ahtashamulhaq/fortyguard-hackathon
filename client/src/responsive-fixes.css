@@ -1,0 +1,32 @@
+@media (max-width: 680px) {
+  .observation-cells {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: .3rem;
+    overflow: visible !important;
+  }
+
+  .observation-cells div { min-width: 0 !important; padding: .55rem .25rem; }
+  .observation-cells span { font-size: .5rem; }
+  .observation-cells strong { font-size: .68rem; }
+
+  .ledger-table-wrap { overflow: visible; border: 0; border-radius: 0; }
+  .ledger-table { display: block; min-width: 0; }
+  .ledger-table thead { display: none; }
+  .ledger-table tbody { display: grid; gap: .7rem; }
+  .ledger-table tr { display: grid; grid-template-columns: 1fr; overflow: hidden; border: 1px solid var(--border); border-radius: 1rem; background: var(--card); }
+  .ledger-table td { display: grid; grid-column: auto !important; gap: .28rem; min-width: 0; padding: .7rem .8rem; border: 0; border-top: 1px solid var(--border); font-size: .72rem; }
+  .ledger-table td::before { color: var(--muted-foreground); font-family: "Azeret Mono", monospace; font-size: .5rem; letter-spacing: .055em; text-transform: uppercase; }
+  .ledger-table td:nth-child(1) { grid-column: 1 / -1; border-top: 0; }
+  .ledger-table td:nth-child(1)::before { content: "Evidence ID"; }
+  .ledger-table td:nth-child(2)::before { content: "Field"; }
+  .ledger-table td:nth-child(3)::before { content: "Event date"; }
+  .ledger-table td:nth-child(4)::before { content: "Payout band"; }
+  .ledger-table td:nth-child(5)::before { content: "Simulated amount"; }
+  .ledger-table td:nth-child(6)::before { content: "Status"; }
+  .ledger-table td:nth-child(7) { grid-column: 1 / -1; align-items: center; border-right: 0; }
+  .ledger-table td:nth-child(7)::before { content: "Evidence record"; }
+  .ledger-table td:nth-child(2n) { border-right: 0; }
+  .ledger-table td:nth-child(5), .ledger-table td:nth-child(6), .ledger-table td:nth-child(7) { border-bottom: 0; }
+  .ledger-table td:nth-child(4) { border-right: 0; }
+  .ledger-status { justify-self: start; }
+}

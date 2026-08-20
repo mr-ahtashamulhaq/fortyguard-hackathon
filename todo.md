@@ -1,26 +1,26 @@
 # Project TODO
 
 - [x] Create the AgriGuard product foundation and repository documentation without adding the implementation plan to the repository.
-- [ ] Configure Supabase client support for the agri-guard project without applying the application database schema yet.
-- [ ] Add a portfolio dashboard with a Leaflet and OpenStreetMap field map, a list view, and Safe, Watch, Triggered, and Data unavailable states.
-- [ ] Add a field-detail view with Recharts temperature and heat-score charts, a 34 °C threshold marker, and highlighted qualifying readings.
-- [ ] Implement the deterministic heat policy engine with a 34 °C threshold, a three-hour continuous-duration rule, flowering or grain-filling checks, and 25%, 50%, and 100% simulated payout bands.
-- [ ] Implement a Groq tool-calling monitoring agent that reads field data, invokes the policy engine, records evidence, and writes a plain-English explanation.
-- [ ] Add a structured fallback report that has the same shape as the Groq-generated explanation.
-- [ ] Add an evidence-record view with observations, threshold, exposure hours, heat score, payout band, simulated amount, data-source label, and explanation.
-- [ ] Add a simulated payout ledger with field, date, payout band, amount, Reviewed and Recorded statuses, and visible simulated-payout disclaimers.
-- [ ] Add a heat-wave demo control that creates fixed synthetic readings and labels every affected view as Synthetic demo data.
+- [x] Configure Supabase client support for the agri-guard project without applying the application database schema yet.
+- [x] Add a portfolio dashboard with a Leaflet and OpenStreetMap field map, a list view, and Safe, Watch, Triggered, and Data unavailable states.
+- [x] Add a field-detail view with Recharts temperature and heat-score charts, a 34 °C threshold marker, and highlighted qualifying readings.
+- [x] Implement the deterministic heat policy engine with a 34 °C threshold, a three-hour continuous-duration rule, flowering or grain-filling checks, and 25%, 50%, and 100% simulated payout bands.
+- [x] Implement a Groq tool-calling monitoring agent that reads field data, invokes the policy engine, records evidence, and writes a plain-English explanation.
+- [x] Add a structured fallback report that has the same shape as the Groq-generated explanation.
+- [x] Add an evidence-record view with observations, threshold, exposure hours, heat score, payout band, simulated amount, data-source label, and explanation.
+- [x] Add a simulated payout ledger with field, date, payout band, amount, Reviewed and Recorded statuses, and visible simulated-payout disclaimers.
+- [x] Add a heat-wave demo control that creates fixed synthetic readings and labels every affected view as Synthetic demo data.
 - [ ] Integrate FortyGuard temperature data as the primary observation source and store observations in Supabase.
-- [ ] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
-- [ ] Enforce duplicate payout prevention in the database and policy engine.
-- [ ] Add missing or stale-data handling, including a Data unavailable state.
-- [ ] Add unit tests for policy rules, duplicate prevention, and fallback-report shape.
+- [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
+- [x] Enforce duplicate payout prevention in the database and policy engine.
+- [x] Add missing or stale-data handling, including a Data unavailable state.
+- [x] Add unit tests for policy rules, duplicate prevention, and fallback-report shape.
 - [ ] Verify the finished UI on desktop and mobile, validate the main demo flow, and prepare the Vercel deployment configuration.
 - [x] Create and verify the schema-free Supabase project named agri-guard in the Hackathons organization.
 - [x] Write the AgriGuard PRD in the repository documentation.
 - [x] Write the detailed implementation plan outside the public repository.
 - [x] Provide current Supabase credential-retrieval steps for the agri-guard project.
-- [ ] Build a swappable temperature-data adapter that uses clearly labeled synthetic demo data until FortyGuard API access is available.
+- [x] Build a swappable temperature-data adapter that uses clearly labeled synthetic demo data until FortyGuard API access is available.
 - [x] Complete the pre-build research package, asset discovery, dependency validation, and finalized visual system before writing product code.
 - [x] Select and document one lightweight public Spline community hero element or two small complementary elements, including its public embed details and performance fallback.
 - [x] Verify and prepare the approved public Spline Code scene at https://prod.spline.design/uVqm7hH8m0iJQ5iX/scene.splinecode for the landing hero.
