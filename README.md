@@ -4,6 +4,14 @@ AgriGuard is a hackathon prototype for **transparent parametric crop insurance**
 
 > **Important:** AgriGuard does not issue insurance and does not move money. Every payout in this project is simulated.
 
+## Hackathon track
+
+**Primary submission track: Agentic (API + Agentic).**
+
+AgriGuard uses the FortyGuard Temperature API as a data source and a Groq tool-calling monitoring agent to retrieve observations, invoke the deterministic policy engine, create evidence, and explain the result. The agent cannot change the rule or the simulated payout. This makes the agentic workflow central to the project rather than a decorative chat feature.
+
+The project also supports the **Government & Environment** theme through climate-risk monitoring for wheat fields, but it will be submitted under **Agentic (API + Agentic)** because the controlled API-and-agent workflow is its clearest hackathon contribution.
+
 ## Product purpose
 
 The product turns field temperature observations into an auditable decision. FortyGuard temperature data is the primary observation source. A deterministic policy engine decides whether a heat event qualifies. A Groq-powered agent explains the result, but it cannot change the policy rule or the payout band.
@@ -34,6 +42,7 @@ The policy engine is deterministic. The language model may create a plain-Englis
 | Charts | Recharts |
 | Agent explanation | Groq tool calling with a template fallback |
 | Primary observation source | FortyGuard Temperature API |
+| Hackathon track | Agentic (API + Agentic) |
 
 The initial template includes Manus authentication and a template database for platform plumbing. The AgriGuard business data will use the separate Supabase project once the approved schema is applied.
 

@@ -26,3 +26,11 @@
 - [x] Verify and prepare the approved public Spline Code scene at https://prod.spline.design/uVqm7hH8m0iJQ5iX/scene.splinecode for the landing hero.
 - [x] Select and download one suitable Pexels landing-page video, including its source URL and intended responsive use.
 - [x] Use the AI Orb and grid loader for agent monitoring and evidence generation only; do not add a chat panel or prompt input.
+- [x] Replace the provisional landing video with the user-supplied 1280×720 Pexels video and its managed web asset path.
+- [x] Submit AgriGuard under the Agentic (API + Agentic) track and document the rationale in the final README.
+- [x] Build the separate animated landing experience with the branded Magic UI Globe replacement, user-supplied video, light and dark themes, and Agentic track positioning.
+- [x] Resolve the visible third-party branding in the public Spline scene or replace it with the branded static field-signal fallback before release.
+- [x] Explore Magic UI, Unlumen, and 21st.dev component catalogs and document only the performance-safe components selected for AgriGuard.
+- [x] Assess and implement only a non-blocking preloader if it improves the first visit without delaying the landing hero.
+- [x] Replace the branded public Spline hero with a branded Magic UI Globe and static signal fallback.
+- [x] Add the selected landing-only enhancements: a reduced-motion-safe smooth cursor, a small policy ripple, and a three-item motion FAQ.

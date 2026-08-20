@@ -51,7 +51,7 @@ The first view contains the headline **“When heat crosses the line, the eviden
 
 The remaining landing sequence is intentionally short:
 
-1. **Heat becomes evidence.** The approved aerial video sits in a wide, quiet section with a small source label.
+1. **Heat becomes evidence.** The user-supplied aerial video sits in a wide, quiet section with a small source label.
 2. **A fixed policy, shown plainly.** Three parts show observation, rule, and record.
 3. **A decision that can be inspected.** A small evidence-sheet preview shows observations, threshold, reasoning, and simulated result.
 4. **A safe monitoring agent.** The section explains that the agent retrieves and explains evidence; it does not set policy or payout values.
@@ -73,7 +73,7 @@ The Evidence view looks like a readable record: source label, policy version, ob
 |---|---|---|
 | Theme control | Fixed header and app bar | Use the supplied symbol with an adapted no-blur circular transition. |
 | Spline scene | Landing hero only | Dynamically load the approved public Code scene. Never render in the application. |
-| Pexels video | Landing evidence section only | Load after viewport entry. Do not autoplay under reduced motion. |
+| User-supplied field video | Landing evidence section only | Load after viewport entry. Do not autoplay under reduced motion. |
 | AI Orb Face | Monitoring or evidence-generation state | Show an accessible text state beside the orb. Disable gaze for small instances. |
 | AI Loader grid | Short waiting state | Use a polite status region and real elapsed time. Never show invented percentages. |
 | AI Prompt Input | Not used | There is no chat panel in the first release. |
@@ -86,9 +86,19 @@ Lenis runs on the landing page only. GSAP and ScrollTrigger control no more than
 
 The theme transition uses `document.startViewTransition` when supported. It starts from the theme button’s measured center, uses a circle reveal without blur, and changes instantly for reduced-motion users or unsupported browsers.
 
+The supplied theme-transition reference confirms the circle variant, no blur, and the View Transition API as the requested behavior. The implementation will derive the clip-path origin from the actual theme-button bounds rather than assuming a fixed corner or center.
+
 The Spline component loads only when the hero is near the viewport. It has a CSS fallback that remains visible until the scene is ready. The Spline scene is not loaded on small or reduced-motion devices. The Pexels video is also deferred and uses its poster image if data saver, reduced motion, or a slow connection is detected.
 
+The public Spline Code scene is not approved for the released landing page because it displays third-party wording and a `Built with Spline` badge. The landing hero will use a branded Magic UI Globe implementation with its own field-signal palette and the same static fallback rules. The globe is a replacement, not an additional 3D runtime.
+
+The landing page will use a custom smooth cursor only for hover-capable, motion-permitted desktop visitors. Native pointers remain visible in forms, keyboard flows, touch devices, and the application workspace. A small Ripple effect will sit behind the 34 °C policy threshold only. A three-item adapted Motion FAQ will sit near the landing-page close.
+
+There will be no blocking full-screen preloader. The visible hero copy and CSS signal fallback render immediately. The 3D globe loads independently in the background, which produces a faster first paint and makes loading state truthful. A small in-context `Preparing field signal` indicator may appear only inside the hero visual while the globe initializes.
+
 No animation may change width, height, padding, margin, top, left, or box shadow on every frame. Motion uses transform and opacity. Every in-view animation must use one observer or one GSAP timeline; it must not create per-card scroll listeners.
+
+The re-confirmed performance guardrails are: defer 3D and video until needed, keep offscreen effects unmounted, use one coordinated scroll system rather than many listeners, avoid unnecessary React state during animation, and prefer `requestAnimationFrame` for any unavoidable custom frame work.
 
 ## Responsive rules
 

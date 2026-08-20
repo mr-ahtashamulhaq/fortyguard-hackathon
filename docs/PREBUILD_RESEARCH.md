@@ -84,6 +84,38 @@ The scene will be imported dynamically only after the landing hero is in or near
 
 The public component catalog contains relevant dashboard, map, AI chat, input, loader, badge, and theme-control categories. The current account display shows a limit of two free copies per day. We will inspect only components with a direct use case and adapt them to the AgriGuard design system. We will not copy a component until its license, dependencies, and accessibility behavior are visible.
 
+## Component-catalog review: Magic UI
+
+The Magic UI catalog contains useful visual primitives, including Globe, Smooth Cursor, Ripple, Scroll Based Velocity, Dotted Map, Animated List, and data-friendly progress components. The review will select only components that help the user understand field evidence and will reject generic sparkle, beam, rainbow, and decorative AI effects.
+
+Magic UI Globe is an interactive WebGL component based on Cobe. It is visually strong but duplicates the project’s existing 3D runtime and does not express a field, threshold, or evidence record by itself. It is not approved for the first release unless it replaces the current hero visual without visible external branding. Source: https://magicui.design/docs/components/globe.
+
+Magic UI Smooth Cursor uses requestAnimationFrame, CSS transforms, pointer events, and automatically ignores touch-first devices. It remains a candidate for the landing page only. It must preserve native cursors for text, form elements, keyboard users, and the operational dashboard. Its motion must disable under reduced-motion preferences. Source: https://magicui.design/docs/components/smooth-cursor.
+
+Magic UI Ripple is a simple animated emphasis background. Its concentric-ripple visual is useful as a small, clipped signal behind a policy threshold or a monitoring state. It is not suitable as a page-wide, permanent background effect. Source: https://magicui.design/docs/components/ripple.
+
+Magic UI Scroll Based Velocity is a scrolling text treatment whose speed changes with user scroll velocity. It is expressive but does not help a reviewer read a policy or evidence record. It is rejected for the operational interface and will only be considered as one brief, reduced-motion-safe landing divider if needed. Source: https://magicui.design/docs/components/scroll-based-velocity.
+
+Unlumen Motion FAQs Accordion is a source-delivered React, Tailwind, and Motion pattern. It uses a one-open-item rule and `ResizeObserver` to measure content height before its spring reveal. It is approved for a concise three-question landing FAQ that explains simulated payouts, synthetic data, and agent boundaries. It will be adapted to the AgriGuard design system rather than copied with the original dark luxury styling. Source: https://ui.unlumen.com/components/motion-faqs-accordion.
+
+## Component-catalog review: 21st.dev
+
+The connected 21st.dev catalog exposes a broad range of relevant categories: marketing heroes, backgrounds, shaders, charts and data visualization, dashboards, maps, cursors, globes, FAQs, and loader states. It also shows a currently available free-copy allowance of two items. The catalog’s featured `Loading State` is a compact pixel-grid loader with an animated wavefront, a status label, and an elapsed timer. It matches the project’s need for a real monitoring wait state better than a decorative full-page preloader.
+
+The next review will inspect the map, globe, cursor, and evidence-oriented categories but will copy only components that maintain AgriGuard’s calm evidence-led design system and do not duplicate existing animation libraries.
+
+The 21st.dev search confirms that the catalog has 51 map components, 41 globe components, 246 chart and data-visualization components, 400 dashboard components, and 152 cursor components. The map search results lean toward generic dark location dashboards and will not replace the planned Leaflet portfolio map. The catalog is most useful for reviewing isolated loading and evidence-status patterns rather than copying a complete dashboard shell.
+
+The broader 21st.dev field-dashboard search shows several globe, map, heatmap, animated-wave, line-chart, and evidence-table candidates. The most relevant visual lesson is the compact status-card treatment in the `Expand Map`, `Interactive Map`, and `Globe` patterns. AgriGuard will retain Leaflet for the real portfolio map and implement a custom field-status layer rather than adopting a dark template or an additional globe runtime.
+
+Magic UI Dotted Map is an SVG dotted-world-map component with custom marker support. It is technically lightweight, but it implies global coverage and would be misleading for a small wheat-field portfolio. It is rejected in favor of the real Leaflet field map inside the application. Source: https://magicui.design/docs/components/dotted-map.
+
+## Final component decisions
+
+The released landing page uses a branded Magic UI Globe as the only WebGL object, a landing-only Smooth Cursor that disables on touch and reduced-motion devices, a small policy-threshold Ripple, and an adapted three-item Motion FAQ. It rejects Magic UI Globe’s generic defaults, Dotted Map, Scroll Based Velocity, generic dark dashboard shells, and page-wide special effects.
+
+The public Spline Code scene is rejected because it visibly included unrelated third-party wording and a `Built with Spline` badge. The custom Globe replacement has no third-party branding and loads only after the hero enters or approaches the viewport. The page now uses an in-context `Preparing field signal` label rather than a blocking full-screen preloader. Desktop and 390 px mobile visual checks confirm that the fallback object, video, policy signal, and FAQ remain readable.
+
 ## SmoothUI verification
 
 The supplied AI references match current SmoothUI components. SmoothUI provides an MIT-licensed React, Tailwind, and Motion component library with a CLI that can add `ai-orb-face`, `ai-prompt-input`, and `ai-loader` with dependencies. [3]
