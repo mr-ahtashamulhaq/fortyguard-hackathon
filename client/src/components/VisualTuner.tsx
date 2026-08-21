@@ -35,7 +35,7 @@ function TunerGroup({ title, children }: { title: string; children: ReactNode })
 export function VisualTuner({ values, onChange, onReset }: { values: LandingTuning; onChange: (patch: Partial<LandingTuning>) => void; onReset: () => void }) {
   const update = <K extends keyof LandingTuning>(key: K) => (value: LandingTuning[K]) => onChange({ [key]: value });
   return <aside className="visual-tuner" aria-label="Temporary visual tuning controls">
-    <details open>
+    <details>
       <summary><SlidersHorizontal size={16} strokeWidth={1.7} /> Visual tuning <span>temporary</span></summary>
       <div className="visual-tuner-body">
         <p>Every major landing section has an adjustable layout, scale, spacing, or motion control. Values save in this browser until you ask to lock them.</p>
