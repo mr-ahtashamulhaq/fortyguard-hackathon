@@ -10,7 +10,7 @@
 - [x] Add an evidence-record view with observations, threshold, exposure hours, heat score, payout band, simulated amount, data-source label, and explanation.
 - [x] Add a simulated payout ledger with field, date, payout band, amount, Reviewed and Recorded statuses, and visible simulated-payout disclaimers.
 - [x] Add a heat-wave demo control that creates fixed synthetic readings and labels every affected view as Synthetic demo data.
-- [ ] Integrate FortyGuard temperature data as the primary observation source and store observations in Supabase.
+- [ ] Make FortyGuard the primary observation source after receiving a verified field GeoJSON boundary in a FortyGuard-covered area; the current derived Punjab demo boundary completed with zero temperature cells and therefore remains safely unavailable.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
@@ -67,4 +67,4 @@
 - [x] Add focused tests for the FortyGuard adapter and validate the live integration safely with the provided API credential.
 - [x] Surface persisted FortyGuard readings, source labels, peak values, and last-observed timestamps in the portfolio and North Field detail views when verified live data exists.
 - [x] Add an integration test that covers the live-monitoring persistence/readback contract without issuing external heatmap requests.
-- [ ] Save the approved visual and backend milestone, then commit and push it to the `github` remote.
+- [x] Save the approved visual and backend milestone, then commit and push it to the `github` remote.
