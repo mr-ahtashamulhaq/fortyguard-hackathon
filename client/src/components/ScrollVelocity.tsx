@@ -11,7 +11,7 @@ function VelocityRow({ children, baseVelocity }: { children: string; baseVelocit
   const { scrollY } = useScroll();
   const velocity = useVelocity(scrollY);
   const smoothVelocity = useSpring(velocity, { damping: 50, stiffness: 400 });
-  const velocityFactor = useTransform(smoothVelocity, [0, 900], [0, 3], { clamp: false });
+  const velocityFactor = useTransform(smoothVelocity, [0, 900], [0, 1.1], { clamp: false });
   const directionFactor = useRef(1);
   const reduceMotion = useReducedMotion();
   const x = useTransform(baseX, value => `${wrap(-48, 0, value)}%`);
@@ -25,6 +25,6 @@ function VelocityRow({ children, baseVelocity }: { children: string; baseVelocit
   return <div className="velocity-row"><motion.div className="velocity-track" style={{ x }}><span>{children}&nbsp;</span><span>{children}&nbsp;</span><span>{children}&nbsp;</span><span>{children}&nbsp;</span></motion.div></div>;
 }
 
-export function ScrollVelocity({ rows }: { rows: string[] }) {
-  return <div className="velocity-stack" aria-label={rows.join(" ")}>{rows.map((row, index) => <VelocityRow key={row} baseVelocity={index % 2 ? -12 : 12}>{row}</VelocityRow>)}</div>;
+export function ScrollVelocity({ rows, idleVelocity = 3 }: { rows: string[]; idleVelocity?: number }) {
+  return <div className="velocity-stack" aria-label={rows.join(" ")}>{rows.map((row, index) => <VelocityRow key={row} baseVelocity={index % 2 ? -idleVelocity : idleVelocity}>{row}</VelocityRow>)}</div>;
 }

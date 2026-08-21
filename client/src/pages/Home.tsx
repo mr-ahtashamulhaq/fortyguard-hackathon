@@ -2,12 +2,13 @@ import { AgriGlobe } from "@/components/AgriGlobe";
 import { AuroraBars } from "@/components/AuroraBars";
 import { FallingText } from "@/components/FallingText";
 import { GradientWaves } from "@/components/GradientWaves";
-import { LandingCursor } from "@/components/LandingCursor";
 import { LandingDock } from "@/components/LandingDock";
 import { MotionFaq } from "@/components/MotionFaq";
 import { ScrollExpand } from "@/components/ScrollExpand";
 import { ScrollVelocity } from "@/components/ScrollVelocity";
+import { defaultLandingTuning, type LandingTuning, VisualTuner } from "@/components/VisualTuner";
 import { ArrowDownRight, ArrowUpRight, CircleDotDashed, FileCheck2, Orbit, ShieldCheck, ThermometerSun } from "lucide-react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 const videoUrl = "/manus-storage/agriguard-aerial-fields-final-web_95a93812.mp4";
 const videoPoster = "/manus-storage/agriguard-aerial-fields-final-poster_7f7c2449.jpg";
@@ -22,12 +23,27 @@ const faqItems = [
   { question: "Are these real insurance payouts?", answer: "No. Every amount in AgriGuard is a simulated payout for the hackathon demo. The project does not issue an insurance contract or transfer money." },
   { question: "What happens when the temperature data is missing?", answer: "The field becomes Data unavailable. AgriGuard does not invent observations or create a simulated payout from missing or stale data." },
   { question: "Does the AI agent decide the payout?", answer: "No. The deterministic heat policy engine applies the threshold, exposure duration, and crop-stage rules. The AI agent retrieves evidence and explains the result." },
+  { question: "How does AgriGuard avoid duplicate payouts?", answer: "Every qualifying event receives a stable idempotency key. Re-running the same North Field scenario returns the existing evidence and simulated payout instead of creating a second ledger row." },
+  { question: "Can FortyGuard data replace the demo readings?", answer: "Yes. The temperature adapter is designed to swap sources. Until the FortyGuard key is available, the deployed demonstration uses clearly labelled synthetic hourly observations." },
 ];
 
 export default function Home() {
+  const [tuning, setTuning] = useState<LandingTuning>(() => {
+    try { return { ...defaultLandingTuning, ...JSON.parse(localStorage.getItem("agriguard-landing-tuning") ?? "{}") }; }
+    catch { return defaultLandingTuning; }
+  });
+  useEffect(() => { localStorage.setItem("agriguard-landing-tuning", JSON.stringify(tuning)); }, [tuning]);
+  const landingStyle = {
+    "--tune-hero-scale": tuning.heroScale,
+    "--tune-globe-scale": tuning.globeScale,
+    "--tune-hero-top": `${tuning.heroTop}rem`,
+    "--tune-video-brightness": tuning.videoBrightness,
+    "--tune-video-overlay": tuning.videoOverlay,
+    "--tune-footer-height": `${tuning.footerHeight}rem`,
+    "--tune-footer-scale": tuning.footerScale,
+  } as CSSProperties;
   return (
-    <div className="landing-page landing-rebuild" id="top">
-      <LandingCursor />
+    <div className="landing-page landing-rebuild" id="top" style={landingStyle}>
       <LandingDock />
       <main>
         <section className="hero-constellation">
@@ -57,7 +73,7 @@ export default function Home() {
         </section>
 
         <section className="velocity-section" aria-label="AgriGuard product principles">
-          <ScrollVelocity rows={["FIELD SIGNAL · POLICY PROOF · EVIDENCE FIRST", "NO BLACK BOX · NO SILENT PAYOUT · NO GUESSWORK"]} />
+          <ScrollVelocity idleVelocity={tuning.velocity} rows={["FIELD SIGNAL · POLICY PROOF · EVIDENCE FIRST", "NO BLACK BOX · NO SILENT PAYOUT · NO GUESSWORK"]} />
         </section>
 
         <section id="signal" className="signal-intro">
@@ -115,19 +131,19 @@ export default function Home() {
         </section>
 
         <section className="judge-band">
-          <GradientWaves className="judge-waves" />
           <div className="judge-band-inner"><span className="section-kicker">Judge-ready demo</span><h2>Watch a field move from safe to triggered in one clear flow.</h2><a className="cta-primary cta-inverse" href="/app">Run the scenario <span><ArrowUpRight size={17} /></span></a></div>
         </section>
 
         <section className="faq-section faq-section-rebuild">
           <div className="faq-intro"><span className="section-kicker">Boundaries / 04</span><h2>Clear about what the demo does and does not do.</h2></div>
-          <MotionFaq items={faqItems} />
+          <MotionFaq items={faqItems} gap={12} />
         </section>
       </main>
       <footer className="landing-footer landing-footer-rebuild">
         <div><span className="section-kicker">Make the signal accountable</span><FallingText text="Trace every reading. Challenge every result." /></div>
         <div className="footer-meta"><span>AgriGuard / FortyGuard Hackathon 2026</span><span>Agentic (API + Agentic) track</span><span>Synthetic demo data · simulated payouts</span></div>
       </footer>
+      <VisualTuner values={tuning} onChange={(patch) => setTuning(current => ({ ...current, ...patch }))} onReset={() => setTuning(defaultLandingTuning)} />
     </div>
   );
 }

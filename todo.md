@@ -43,3 +43,9 @@
 - [x] Add the requested dock navigation, branded Aurora Bars, Gradient Waves, scroll-velocity typography, and falling-text footer in purposeful locations with reduced-motion fallbacks.
 - [x] Re-audit the complete landing visually on desktop and mobile, then fix spacing, contrast, light/dark theming, and interaction defects before delivery.
 - [x] Prepare and document the Vercel deployment configuration, build settings, required environment variables, and the deferred FortyGuard key handoff.
+- [x] Correct the footer height and center the falling-text interaction so all footer content is visible and readable.
+- [x] Remove the custom smooth cursor and restore the default browser cursor site-wide.
+- [x] Make the field video visibly full-bleed in its narrative section and correct the low-idle-speed velocity animation.
+- [x] Replace the current FAQ interaction with the supplied motion accordion pattern and provide five accessible questions and answers.
+- [x] Remove the unintended horizontal bar from the judge-demo gradient section.
+- [ ] Add a temporary accessible visual-tuning panel with sliders for the key landing size, placement, scale, and motion controls; defer the GitHub push until the user locks the selected values.
