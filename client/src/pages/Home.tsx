@@ -11,7 +11,7 @@ import { ArrowDownRight, ArrowUpRight, CircleDotDashed, FileCheck2, Orbit, Shiel
 import { useEffect, useState, type CSSProperties } from "react";
 
 const videoUrl = "/manus-storage/agriguard-aerial-fields-final-web_95a93812.mp4";
-const videoPoster = "/manus-storage/agriguard-aerial-fields-final-poster_7f7c2449.jpg";
+const videoPoster = "/manus-storage/agriguard-aerial-fields-final-poster_ce730a0b.jpg";
 
 const policySteps = [
   { number: "01", title: "Observe", icon: ThermometerSun, copy: "Hourly temperature readings are normalized and attached to the field record." },

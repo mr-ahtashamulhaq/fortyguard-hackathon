@@ -52,3 +52,6 @@
 - [x] Replace the dock theme control with the supplied theme button and exact top-corner no-blur circular reveal transition.
 - [x] Rebuild falling-text physics and layout so the text can use the full footer field without overlapping footer metadata or collapsing into a narrow left column.
 - [x] Expand the temporary visual-tuning panel to cover each major landing section and its key visual elements.
+- [x] Restore visibly playing full-bleed field video in the narrative stage while preserving the user’s current browser-based tuning values.
+- [x] Reduce Aurora Bars rendering density and scroll cost without removing the branded policy-engine atmosphere.
+- [x] Verify the full-bleed field video visibly renders and plays in the connected browser at desktop and mobile, then correct any remaining media-loading or overlay issue.
