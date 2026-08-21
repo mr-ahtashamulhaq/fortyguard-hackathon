@@ -41,7 +41,7 @@ function templateExplanation({ field, policy, evaluation }: AgentContext): Evide
   return {
     source: "template",
     headline: evaluation.status === "triggered" ? "Heat event meets the fixed policy rule." : "Heat event did not meet the fixed policy rule.",
-    summary: `${field.id} was evaluated against ${policy.version}. The server found ${evaluation.longestExposureHours} qualifying hourly readings and a ${evaluation.heatScore} degree-hour heat score, producing ${band}.`,
+    summary: `The selected field was evaluated against ${policy.version}. The server found ${evaluation.longestExposureHours} qualifying hourly readings and a ${evaluation.heatScore} degree-hour heat score, producing ${band}.`,
     reasons: evaluation.reasons,
     recommendedAction: evaluation.status === "triggered" ? "Review the evidence record before marking the simulated payout as reviewed." : "Continue monitoring the field. No payout record is created for this result.",
     disclaimer: "This is a synthetic hackathon demonstration. The policy decision is deterministic and no money is moved.",
@@ -75,7 +75,7 @@ async function callGroq(messages: GroqMessage[], toolChoice: "none" | { type: "f
 export async function createAgentExplanation(context: AgentContext, handlers: MonitoringAgentToolHandlers): Promise<EvidenceExplanation> {
   if (!process.env.GROQ_API_KEY) return templateExplanation(context);
   const system = "You are the AgriGuard monitoring agent. You explain a deterministic wheat heat-policy evaluation. You cannot alter policy thresholds, field data, stages, payout bands, or payout amounts. First use the supplied tools. Then return only JSON with headline, summary, reasons, recommendedAction, and disclaimer. Keep wording simple and state that money is not moved.";
-  const messages: GroqMessage[] = [{ role: "system", content: system }, { role: "user", content: `Explain the monitoring run for field ${context.field.id}.` }];
+  const messages: GroqMessage[] = [{ role: "system", content: system }, { role: "user", content: "Explain the monitoring run for the selected field." }];
   try {
     for (const toolName of ["get_field_data", "evaluate_heat_event", "create_evidence_record", "create_simulated_payout"]) {
       const response = await callGroq(messages, { type: "function", function: { name: toolName } });

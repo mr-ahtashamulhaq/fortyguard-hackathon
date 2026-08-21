@@ -27,13 +27,26 @@ describe("live FortyGuard portfolio readback", () => {
       if (table === "fields") return { upsert: vi.fn().mockResolvedValue({ error: null }) };
       if (table === "policies") return { upsert: vi.fn(() => ({ select: () => ({ single: vi.fn().mockResolvedValue({ data: policy, error: null }) }) })) };
       if (table === "temperature_observations") return { select: vi.fn(() => ({ eq: () => ({ eq: () => ({ order: () => ({ limit: vi.fn().mockResolvedValue({ data: rows, error: null }) }) }) }) })) };
+      if (table === "evidence_records") {
+        return {
+          select: vi.fn(() => ({
+            eq: () => ({
+              like: () => ({
+                order: () => ({
+                  limit: () => ({ maybeSingle: vi.fn().mockResolvedValue({ data: { record_code: "LIVE-FRESNO-2024071514" }, error: null }) }),
+                }),
+              }),
+            }),
+          })),
+        };
+      }
       throw new Error(`Unexpected table ${table}`);
     });
 
     const portfolio = await getPortfolioData();
     const north = portfolio.fields.find((field) => field.id === "north");
 
-    expect(portfolio).toMatchObject({ source: "fortyguard", lastReading: "13:00 UTC" });
+    expect(portfolio).toMatchObject({ source: "fortyguard", lastReading: "13:00 UTC", latestLiveEvidenceCode: "LIVE-FRESNO-2024071514" });
     expect(north).toMatchObject({ source: "FortyGuard", peak: 36.1, status: "Triggered" });
 
     const detail = await getFieldDetail("north");

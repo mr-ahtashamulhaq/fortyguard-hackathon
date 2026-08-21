@@ -10,8 +10,10 @@ const statusColor: Record<Field["status"], string> = {
 };
 
 export function FieldMap({ fields }: { fields: Field[] }) {
+  const primary = fields[0];
+  if (!primary) return null;
   return (
-    <MapContainer center={[30.09, 71.5]} zoom={10} scrollWheelZoom={false} className="field-map" aria-label="Map of monitored demo fields">
+    <MapContainer key={`${primary.id}-${primary.position.join("-")}`} center={primary.position} zoom={10} scrollWheelZoom={false} className="field-map" aria-label="Map of monitored demo fields">
       <TileLayer
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -3,13 +3,13 @@ import { createAgentExplanation, createTemplateExplanation, type EvidenceExplana
 import { evaluateHeatPolicy, type FieldInput, type PolicyInput } from "./policy-engine";
 import { createTemperatureAdapter } from "./temperature-adapter";
 
-type FieldSeed = { id: string; name: string; region: string; latitude: number; longitude: number; hectares: number; cropStage: string; sourceStatus: "synthetic_demo" | "fortyguard" | "unavailable" };
+type FieldSeed = { id: string; name: string; farm: string; region: string; latitude: number; longitude: number; hectares: number; cropStage: string; sourceStatus: "synthetic_demo" | "fortyguard" | "unavailable" };
 
 const fieldSeeds: FieldSeed[] = [
-  { id: "north", name: "North Field", region: "Punjab demo region", latitude: 30.17, longitude: 71.49, hectares: 42, cropStage: "grain_filling", sourceStatus: "synthetic_demo" },
-  { id: "east", name: "East Plot", region: "Punjab demo region", latitude: 30.11, longitude: 71.64, hectares: 28, cropStage: "flowering", sourceStatus: "synthetic_demo" },
-  { id: "south", name: "South Block", region: "Punjab demo region", latitude: 29.97, longitude: 71.55, hectares: 53, cropStage: "grain_filling", sourceStatus: "synthetic_demo" },
-  { id: "west", name: "West Trial", region: "Punjab demo region", latitude: 30.08, longitude: 71.34, hectares: 16, cropStage: "flowering", sourceStatus: "unavailable" },
+  { id: "north", name: "Fresno Public Wheat Field", farm: "Fresno County public demo", region: "Fresno County, California", latitude: 36.698172, longitude: -120.432656, hectares: 257.8, cropStage: "grain_filling", sourceStatus: "synthetic_demo" },
+  { id: "east", name: "East Plot", farm: "Riverside Wheat", region: "Punjab demo region", latitude: 30.11, longitude: 71.64, hectares: 28, cropStage: "flowering", sourceStatus: "synthetic_demo" },
+  { id: "south", name: "South Block", farm: "Meadowline Co-op", region: "Punjab demo region", latitude: 29.97, longitude: 71.55, hectares: 53, cropStage: "grain_filling", sourceStatus: "synthetic_demo" },
+  { id: "west", name: "West Trial", farm: "Meadowline Co-op", region: "Punjab demo region", latitude: 30.08, longitude: 71.34, hectares: 16, cropStage: "flowering", sourceStatus: "unavailable" },
 ];
 
 const northPolicySeed = { field_id: "north", version: "HEAT-WHEAT-01 / v1.0", threshold_c: 34, minimum_continuous_hours: 3, eligible_stages: ["flowering", "grain_filling"], payout_currency: "USD", maximum_simulated_amount: 25000, effective_from: "2026-01-01T00:00:00.000Z", effective_to: "2026-12-31T23:59:59.000Z", is_active: true };
@@ -24,7 +24,7 @@ function presentationStatus(status: string): PortfolioField["status"] {
 }
 
 function fieldDto(seed: FieldSeed, status: PortfolioField["status"], peak: number | null, source: PortfolioField["source"] = "Synthetic demo data"): PortfolioField {
-  return { id: seed.id, name: seed.name, farm: seed.id === "north" || seed.id === "east" ? "Riverside Wheat" : "Meadowline Co-op", hectares: seed.hectares, status, stage: seed.cropStage === "grain_filling" ? "Grain filling" : "Flowering", lastReading: seed.id === "west" ? "—" : "14:00 UTC", source, position: [seed.latitude, seed.longitude], peak };
+  return { id: seed.id, name: seed.name, farm: seed.farm, hectares: seed.hectares, status, stage: seed.cropStage === "grain_filling" ? "Grain filling" : "Flowering", lastReading: seed.id === "west" ? "—" : "14:00 UTC", source, position: [seed.latitude, seed.longitude], peak };
 }
 
 async function ensureBaseData() {
@@ -45,13 +45,19 @@ type StoredTemperatureObservation = { observed_at: string; temperature_c: number
 
 export function normalizeStoredFortyGuardObservations(rows: StoredTemperatureObservation[], fetchedAt = new Date().toISOString()) {
   const observations = [...rows].sort((left, right) => Date.parse(left.observed_at) - Date.parse(right.observed_at)).map((row) => ({ observedAt: row.observed_at, temperatureC: Number(row.temperature_c), source: "fortyguard" as const, quality: row.quality }));
-  return { source: "fortyguard" as const, observations, sourceStatus: observations.length ? "fortyguard" as const : "unavailable" as const, fetchedAt };
+  return { source: "fortyguard" as const, observations, sourceStatus: observations.length ? "fortyguard" as const : "unavailable" as const, fetchedAt: observations.at(-1)?.observedAt ?? fetchedAt };
 }
 
 async function getStoredFortyGuardTemperature(base: NonNullable<Awaited<ReturnType<typeof ensureBaseData>>>, fieldId: string) {
   const { data, error } = await base.supabase.from("temperature_observations").select("observed_at, temperature_c, quality").eq("field_id", fieldId).eq("source", "fortyguard").order("observed_at", { ascending: false }).limit(3);
   if (error || !data?.length) return null;
   return normalizeStoredFortyGuardObservations(data as StoredTemperatureObservation[]);
+}
+
+async function getLatestLiveEvidenceCode(base: NonNullable<Awaited<ReturnType<typeof ensureBaseData>>>) {
+  const { data, error } = await base.supabase.from("evidence_records").select("record_code").eq("field_id", "north").like("record_code", "LIVE-FRESNO-%").order("created_at", { ascending: false }).limit(1).maybeSingle();
+  if (error) return null;
+  return data?.record_code ?? null;
 }
 
 export async function getPortfolioData() {
@@ -62,7 +68,8 @@ export async function getPortfolioData() {
   const northPeak = northReadings.observations.length ? Math.max(...northReadings.observations.map((observation) => observation.temperatureC)) : null;
   const lastReading = northReadings.observations.at(-1) ? `${northReadings.observations.at(-1)!.observedAt.slice(11, 16)} UTC` : "—";
   const source = northReadings.source === "fortyguard" ? "FortyGuard" : "Synthetic demo data";
-  return { fields: [fieldDto(fieldSeeds[0]!, presentationStatus(north.status), northPeak, source), fieldDto(fieldSeeds[1]!, "Watch", 33.6), fieldDto(fieldSeeds[2]!, "Safe", 30.4), fieldDto(fieldSeeds[3]!, "Data unavailable", null)], source: northReadings.source, lastReading };
+  const latestLiveEvidenceCode = await getLatestLiveEvidenceCode(base);
+  return { fields: [fieldDto(fieldSeeds[0]!, presentationStatus(north.status), northPeak, source), fieldDto(fieldSeeds[1]!, "Watch", 33.6), fieldDto(fieldSeeds[2]!, "Safe", 30.4), fieldDto(fieldSeeds[3]!, "Data unavailable", null)], source: northReadings.source, lastReading, latestLiveEvidenceCode };
 }
 
 export async function getFieldDetail(fieldId: string) {
@@ -137,7 +144,7 @@ export async function runFortyGuardMonitoring() {
   const base = await ensureBaseData();
   const policy: PolicyInput = base ? policyInput(base.policy) : { id: "heat-wheat-01", version: northPolicySeed.version, thresholdC: 34, minimumContinuousHours: 3, eligibleStages: ["flowering", "grain_filling"], maximumSimulatedAmount: 25000, currency: "USD" };
   const field: FieldInput = { id: fieldSeed.id, crop: "wheat", cropStage: "grain_filling", sourceStatus: temperature.sourceStatus };
-  const evaluation = evaluateHeatPolicy(field, policy, temperature.observations, { evaluatedAt: temperature.fetchedAt });
+  const evaluation = evaluateHeatPolicy(field, policy, temperature.observations, { evaluatedAt: temperature.observations.at(-1)?.observedAt ?? temperature.fetchedAt });
   const peak = temperature.observations.length ? Math.max(...temperature.observations.map((observation) => observation.temperatureC)) : null;
   const sourceField = fieldDto(fieldSeed, presentationStatus(evaluation.status), peak, "FortyGuard");
 
@@ -145,7 +152,7 @@ export async function runFortyGuardMonitoring() {
     return { source: "fortyguard" as const, persisted: false, evaluation, field: sourceField, observations: temperature.observations, activity: temperature.metadata ?? null, error: temperature.error ?? "FortyGuard observations were unavailable." };
   }
 
-  await base.supabase.from("fields").update({ source_status: "fortyguard" }).eq("id", fieldSeed.id);
+  await base.supabase.from("fields").update({ name: fieldSeed.name, region: fieldSeed.region, latitude: fieldSeed.latitude, longitude: fieldSeed.longitude, hectares: fieldSeed.hectares, source_status: "fortyguard" }).eq("id", fieldSeed.id);
   const observationRows = temperature.observations.map((observation) => ({ field_id: fieldSeed.id, source: "fortyguard", observed_at: observation.observedAt, temperature_c: observation.temperatureC, quality: observation.quality ?? "verified", source_metadata: temperature.metadata ?? {} }));
   const { error: observationError } = await base.supabase.from("temperature_observations").upsert(observationRows, { onConflict: "field_id,source,observed_at" });
   if (observationError) throw new Error(observationError.message);
@@ -157,7 +164,8 @@ export async function runFortyGuardMonitoring() {
   const { data: storedEvaluation, error: storedEvaluationError } = await base.supabase.from("heat_evaluations").select().eq("run_key", runKey).single();
   if (storedEvaluationError) throw new Error(storedEvaluationError.message);
 
-  const evidenceCode = `LIVE-${new Date(temperature.fetchedAt).toISOString().replace(/[-:.TZ]/g, "").slice(0, 10)}`;
+  const evidenceTimestamp = temperature.observations.at(-1)?.observedAt ?? temperature.fetchedAt;
+  const evidenceCode = `LIVE-FRESNO-${new Date(evidenceTimestamp).toISOString().replace(/[-:.TZ]/g, "").slice(0, 10)}`;
   const persistEvidence = async (explanation: EvidenceExplanation) => {
     const { error } = await base.supabase.from("evidence_records").upsert({ record_code: evidenceCode, evaluation_id: storedEvaluation.id, field_id: fieldSeed.id, report: { field: sourceField, policy, observations: temperature.observations, evaluation, sourceMetadata: temperature.metadata ?? {} }, agent_explanation: JSON.stringify(explanation), agent_mode: explanation.source === "groq" ? "groq_tool_call" : "template_fallback" }, { onConflict: "evaluation_id" });
     if (error) throw new Error(error.message);

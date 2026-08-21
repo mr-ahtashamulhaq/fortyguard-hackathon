@@ -8,7 +8,10 @@ import { trpc } from "@/lib/trpc";
 const chartTooltip = { contentStyle: { background: "#10221d", border: "none", borderRadius: "12px", color: "#f1f5ee", fontSize: "12px" }, labelStyle: { color: "#a9d7b2" } };
 
 export default function FieldDetail() {
-  const { data: fieldDetail } = trpc.agriGuard.fieldDetail.useQuery({ fieldId: "north" });
+  const { data: fieldDetail, isLoading } = trpc.agriGuard.fieldDetail.useQuery({ fieldId: "north" });
+  if (isLoading) {
+    return <AppShell action={<RunMonitorButton />} sourceLabel="Loading field data"><div className="app-page detail-page"><p className="app-eyebrow">Field detail</p><h1>Loading monitored field data.</h1><p>Retrieving the latest verified or synthetic observation set.</p></div></AppShell>;
+  }
   const chartReadings = fieldDetail?.readings ?? temperatures.map((reading, index) => ({ ...reading, heatScore: heatScore[index]?.score ?? 0 }));
   const field = fieldDetail?.field ?? evidence.field;
   const evaluation = fieldDetail?.evaluation;

@@ -26,7 +26,7 @@ function Router() {
         <Route path={"/"} component={Home} />
         <Route path={"/app"} component={Portfolio} />
         <Route path={"/app/fields/north"} component={FieldDetail} />
-        <Route path={"/app/evidence/demo-042"} component={Evidence} />
+        <Route path={"/app/evidence/:recordCode"} component={Evidence} />
         <Route path={"/app/ledger"} component={Ledger} />
         <Route path={"/404"} component={NotFound} />
         <Route component={NotFound} />

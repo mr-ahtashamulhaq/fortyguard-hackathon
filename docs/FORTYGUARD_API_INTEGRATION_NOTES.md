@@ -9,9 +9,13 @@ The official API documentation describes API-key authentication through the `api
 
 ## AgriGuard adapter decision
 
-AgriGuard uses the FortyGuard heatmap workflow for the last three completed UTC hours. It requests `analytic_type: "tcm"`, extracts `result.stats_data.temperature_stats.mean`, normalizes it into `{ observedAt, temperatureC, source: "fortyguard" }`, and stores it in `temperature_observations`. The mean is the selected conservative, field-level statistic; it does not substitute a local maximum for the policy reading.
+AgriGuard uses the FortyGuard heatmap workflow for a three-hour hourly observation window. It requests `analytic_type: "tcm"`, extracts `result.stats_data.temperature_stats.mean`, normalizes it into `{ observedAt, temperatureC, source: "fortyguard" }`, and stores it in `temperature_observations`. The mean is the selected conservative, field-level statistic; it does not substitute a local maximum for the policy reading.
 
-The seed records currently store field centre points and hectares, not surveyed boundaries. The adapter therefore derives a small square GeoJSON polygon from that centre and area, labels its geometry source in the stored metadata, and fails closed if FortyGuard returns no temperature cells. A 21 August 2026 live request for the North Field seed completed with `n_cells: 0`, so no policy evaluation, evidence record, or simulated payout was created from it. The dashboard keeps the synthetic demo intact and reports the data as unavailable. Before live agricultural monitoring is enabled by default, replace these derived polygons with verified field GeoJSON boundaries in a FortyGuard-covered area.
+The primary hackathon profile now uses a public California Department of Water Resources Statewide Crop Mapping 2023 crop-area polygon: `UniqueID 1011953`, classified `G2` (Wheat), in Fresno County, California. The DWR legend defines `G2` as wheat. This is a transparent public demo boundary, not a legal parcel or an insured producer’s field boundary.[4] [5]
+
+FortyGuard completed this public field’s 15 July 2024 12:00–14:00 UTC window with mean temperatures of 35.1539 °C, 36.3257 °C, and 37.6697 °C. AgriGuard rounds the readings to one decimal place before the unchanged deterministic policy evaluation. The dashboard labels the source as FortyGuard and keeps all payout labels simulated. Because the selected demonstration window is historical, the policy evaluates it at its latest verified observation time rather than against today’s clock; this preserves the freshness safeguard for both real-time and documented historical monitoring.
+
+Other fields retain centre-and-hectares geometry only in explicit fallback code. The adapter labels that geometry source in stored metadata and fails closed if FortyGuard returns no temperature cells. No public crop-mapping polygon should be treated as a legal field boundary or used for a real insurance decision.
 
 The synthetic heat-wave adapter remains the reliable demo path. It must not be removed when the live adapter is enabled.
 
@@ -24,3 +28,5 @@ The project stores the API key only as `FORTYGUARD_API_KEY`; it is never exposed
 [1]: https://docs-api.fortyguard.com/docs/quickstart "FortyGuard API Quickstart"
 [2]: https://docs-api.fortyguard.com/docs/authentication "FortyGuard API Authentication"
 [3]: https://docs-api.fortyguard.com/docs/create-heatmap "FortyGuard Create Heatmap"
+[4]: https://data.cnra.ca.gov/dataset/statewide-crop-mapping "California Department of Water Resources Statewide Crop Mapping"
+[5]: https://data.cnra.ca.gov/dataset/6c3d65e3-35bb-49e1-a51e-49d5a2cf09a9/resource/25d0f174-4bec-4987-a402-602cd1372786/download/i15_crop_mapping_final_2023.zip "California DWR Statewide Crop Mapping 2023 GIS Shapefile"

@@ -10,7 +10,18 @@
 - [x] Add an evidence-record view with observations, threshold, exposure hours, heat score, payout band, simulated amount, data-source label, and explanation.
 - [x] Add a simulated payout ledger with field, date, payout band, amount, Reviewed and Recorded statuses, and visible simulated-payout disclaimers.
 - [x] Add a heat-wave demo control that creates fixed synthetic readings and labels every affected view as Synthetic demo data.
-- [ ] Make FortyGuard the primary observation source after receiving a verified field GeoJSON boundary in a FortyGuard-covered area; the current derived Punjab demo boundary completed with zero temperature cells and therefore remains safely unavailable.
+- [x] Make FortyGuard the primary observation source after receiving a verified field GeoJSON boundary in a FortyGuard-covered area; the current derived Punjab demo boundary completed with zero temperature cells and therefore remains safely unavailable.
+- [x] Select a real public California wheat-field boundary with clear provenance for the live AgriGuard demo.
+- [x] Validate the selected California boundary with FortyGuard and confirm completed heatmaps contain usable field temperature cells.
+- [x] Configure the California field as the primary live observation source while retaining synthetic data only as an explicit fallback.
+- [x] Update the operational labels and integration notes with the selected California field provenance and live-data validation result.
+- [x] Audit field detail, evidence, and any remaining North Field labels so verified California FortyGuard data is represented consistently outside the portfolio.
+- [ ] Checkpoint and push the verified California primary-source configuration, source-aware evidence route, and operational map update to the `github` remote.
+- [x] Replace legacy user-visible `north` wording in the live agent explanation with the Fresno Public Wheat Field name.
+- [x] Add source-aware loading states so live evidence and field-detail routes do not briefly present synthetic North Field fallback content while verified data is loading.
+- [x] Re-verify the field-detail and verified-evidence routes after California source-label cleanup.
+- [x] Persist and surface the latest verified live evidence record server-side so the portfolio retains the Fresno/FortyGuard evidence link after reloads.
+- [x] Re-verify the refreshed portfolio CTA and source labels after adding the persistent verified evidence lookup.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
