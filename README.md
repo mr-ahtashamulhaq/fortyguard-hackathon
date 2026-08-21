@@ -140,9 +140,31 @@ docs/                             PRD, architecture, visual direction, and asset
 
 The detailed implementation plan is intentionally maintained outside this public repository.
 
-## Deployment note
+## Vercel deployment handoff
 
-The repository produces a working production bundle with `pnpm build`. For the current project, use the built-in publish flow after saving a checkpoint. If deploying independently on Vercel Hobby, configure the same server and browser environment variables and verify the Express/tRPC runtime model before publishing.
+The production build passes with the standard Vite command shown below. The app is an Express server with a Vite client build, so deploy it as a Node application rather than as a static-export-only site.
+
+| Vercel setting | Value |
+|---|---|
+| Framework preset | Other / Node.js |
+| Install command | `pnpm install --frozen-lockfile` |
+| Build command | `pnpm build` |
+| Start command | `pnpm start` |
+| Node.js version | 22.x |
+| Output directory | Leave unset; the server serves `dist/public` |
+
+Add the following variables to the Vercel project before a deployment. They must be configured in Vercel, not committed to the repository.
+
+| Variable | Deployment requirement |
+|---|---|
+| `VITE_SUPABASE_URL` | Required in both preview and production builds. |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Required in both preview and production builds. |
+| `SUPABASE_SECRET_KEY` | Required server-side at runtime. Never prefix it with `VITE_`. |
+| `GROQ_API_KEY` | Recommended server-side at runtime. The deterministic template fallback remains available if it is omitted or rate-limited. |
+| `FORTYGUARD_TEMPERATURE_API_URL` | Leave unset while synthetic demo data is the active source. |
+| `FORTYGUARD_API_KEY` | **Deferred.** Add only after FortyGuard issues a valid key; keep it server-side and rerun the adapter checks before enabling it. |
+
+> **Hackathon deployment state:** the public demo is ready to deploy with its controlled Supabase-backed synthetic scenario. Live FortyGuard reads stay disabled until the provider key is available, and every affected product view keeps its synthetic-data label until then.
 
 ## References
 

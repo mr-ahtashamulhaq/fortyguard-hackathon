@@ -15,7 +15,7 @@
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
 - [x] Add unit tests for policy rules, duplicate prevention, and fallback-report shape.
-- [ ] Verify the finished UI on desktop and mobile, validate the main demo flow, and prepare the Vercel deployment configuration.
+- [x] Verify the finished UI on desktop and mobile, validate the main demo flow, and prepare the Vercel deployment configuration. The standard Vite build completes without a custom deployment configuration; the live FortyGuard environment variable remains deferred until a key is available.
 - [x] Create and verify the schema-free Supabase project named agri-guard in the Hackathons organization.
 - [x] Write the AgriGuard PRD in the repository documentation.
 - [x] Write the detailed implementation plan outside the public repository.
@@ -38,3 +38,8 @@
 - [x] Compare the supplied motion FAQ accordion with the existing implementation and retain only any material accessibility or interaction improvement. Applied explicit question-panel ARIA relationships and reduced-motion-safe transitions.
 - [x] Complete the frontend verification and pause the live FortyGuard integration until an API key is available. The official API contract and required server-only key are documented in `docs/FORTYGUARD_API_INTEGRATION_NOTES.md`.
 - [x] Add route-level code splitting so map, chart, and globe code load only when their corresponding AgriGuard screen is opened.
+- [x] Replace the boxed hero globe with an open Magic UI-inspired globe composition that remains accessible and mobile-safe.
+- [x] Rebuild the landing as a longer, layered visual narrative with a full-bleed video stage and stronger spacing, hierarchy, and background depth.
+- [x] Add the requested dock navigation, branded Aurora Bars, Gradient Waves, scroll-velocity typography, and falling-text footer in purposeful locations with reduced-motion fallbacks.
+- [x] Re-audit the complete landing visually on desktop and mobile, then fix spacing, contrast, light/dark theming, and interaction defects before delivery.
+- [x] Prepare and document the Vercel deployment configuration, build settings, required environment variables, and the deferred FortyGuard key handoff.
