@@ -10,7 +10,7 @@
 .landing-dock-demo { padding: .68rem .85rem; border-radius: .85rem; color: var(--background); background: var(--foreground); font-size: .72rem; font-weight: 700; transition: transform .2s ease, background .2s ease; }
 .landing-dock-demo:hover { background: #2e6b55; transform: translateY(-2px); }
 
-.hero-constellation { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(430px, 1.05fr); align-items: center; column-gap: clamp(1rem, 4vw, 5rem); row-gap: 2rem; min-height: 100dvh; padding: var(--tune-hero-top, 9.5rem) max(2rem, calc((100vw - 1320px) / 2)) 4.25rem; overflow: clip; isolation: isolate; }
+.hero-constellation { position: relative; display: grid; grid-template-columns: minmax(0, .95fr) minmax(430px, 1.05fr); align-items: center; column-gap: clamp(1rem, 4vw, 5rem); row-gap: 2rem; min-height: 100dvh; padding: var(--tune-hero-top, 9.5rem) calc(max(2rem, calc((100vw - 1320px) / 2)) + var(--tune-edge-inset, 0)) 4.25rem; overflow: clip; isolation: isolate; }
 .hero-waves { position: absolute; z-index: -3; inset: 0 0 35%; opacity: .38; mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%); }
 .hero-noise { position: absolute; z-index: -2; inset: 0; opacity: .17; background-image: radial-gradient(color-mix(in oklab, var(--foreground) 28%, transparent) .6px, transparent .6px); background-size: 6px 6px; mask-image: linear-gradient(to bottom, #000, transparent 70%); pointer-events: none; }
 .landing-rebuild .hero-copy { position: relative; max-width: 47rem; padding-bottom: 2rem; transform: scale(var(--tune-hero-scale, 1)); transform-origin: left center; }

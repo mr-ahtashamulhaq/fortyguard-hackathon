@@ -63,7 +63,7 @@ async function callGroq(messages: GroqMessage[], toolChoice: "none" | { type: "f
   const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
     method: "POST",
     headers: { Authorization: `Bearer ${process.env.GROQ_API_KEY}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: "openai/gpt-oss-20b", messages, tools: monitoringTools, tool_choice: toolChoice, temperature: 0, max_completion_tokens: 700, parallel_tool_calls: false, response_format: toolChoice === "none" ? { type: "json_object" } : undefined }),
+    body: JSON.stringify({ model: "openai/gpt-oss-120b", messages, tools: monitoringTools, tool_choice: toolChoice, temperature: 0, max_completion_tokens: 700, parallel_tool_calls: false, response_format: toolChoice === "none" ? { type: "json_object" } : undefined }),
   });
   if (!response.ok) throw new Error(`Groq returned ${response.status}.`);
   const payload = await response.json() as { choices?: { message?: { content?: string | null; tool_calls?: ToolCall[] } }[] };

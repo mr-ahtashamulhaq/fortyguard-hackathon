@@ -34,10 +34,18 @@ describe.skipIf(!hasSupabaseConfiguration)("Supabase configuration", () => {
 
 describe.skipIf(!groqApiKey)("Groq configuration", () => {
   it("accepts the server-side API key", async () => {
-    const response = await fetch("https://api.groq.com/openai/v1/models", {
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
       headers: {
         Authorization: `Bearer ${groqApiKey}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        model: "openai/gpt-oss-120b",
+        messages: [{ role: "user", content: "Reply with OK." }],
+        max_completion_tokens: 16,
+        temperature: 0,
+      }),
     });
 
     expect(response.status).not.toBe(401);

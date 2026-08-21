@@ -34,20 +34,43 @@ export default function Home() {
   });
   useEffect(() => { localStorage.setItem("agriguard-landing-tuning", JSON.stringify(tuning)); }, [tuning]);
   const landingStyle = {
+    "--tune-edge-inset": `${tuning.edgeInset}rem`,
     "--tune-dock-scale": tuning.dockScale,
+    "--tune-dock-offset": `${tuning.dockOffset}rem`,
     "--tune-hero-scale": tuning.heroScale,
     "--tune-globe-scale": tuning.globeScale,
     "--tune-hero-top": `${tuning.heroTop}rem`,
+    "--tune-hero-side": `${tuning.heroSide}rem`,
+    "--tune-hero-type": tuning.heroType,
+    "--tune-proof-padding": `${tuning.proofPad}rem`,
+    "--tune-proof-type": tuning.proofType,
+    "--tune-velocity-padding": `${tuning.velocityPad}rem`,
+    "--tune-velocity-type": tuning.velocityType,
     "--tune-video-brightness": tuning.videoBrightness,
     "--tune-video-overlay": tuning.videoOverlay,
     "--tune-signal-padding": `${tuning.signalPad}rem`,
+    "--tune-signal-side": `${tuning.signalSide}rem`,
+    "--tune-signal-type": tuning.signalType,
+    "--tune-orbit-scale": tuning.orbitScale,
+    "--tune-video-height": `${tuning.videoHeight}dvh`,
+    "--tune-video-copy-scale": tuning.videoCopyScale,
+    "--tune-video-copy-side": `${tuning.videoCopySide}rem`,
     "--tune-policy-padding": `${tuning.policyPad}rem`,
+    "--tune-policy-type": tuning.policyType,
+    "--tune-policy-card-scale": tuning.policyCardScale,
     "--tune-evidence-padding": `${tuning.evidencePad}rem`,
+    "--tune-evidence-type": tuning.evidenceType,
+    "--tune-evidence-side": `${tuning.evidenceSide}rem`,
+    "--tune-evidence-sheet-scale": tuning.evidenceSheetScale,
     "--tune-judge-height": `${tuning.judgeHeight}dvh`,
     "--tune-judge-scale": tuning.judgeScale,
+    "--tune-judge-side": `${tuning.judgeSide}rem`,
     "--tune-faq-padding": `${tuning.faqPad}rem`,
+    "--tune-faq-type": tuning.faqType,
+    "--tune-faq-width": `${tuning.faqWidth}%`,
     "--tune-footer-height": `${tuning.footerHeight}rem`,
     "--tune-footer-scale": tuning.footerScale,
+    "--tune-footer-inset": `${tuning.footerInset}rem`,
   } as CSSProperties;
   return (
     <div className="landing-page landing-rebuild" id="top" style={landingStyle}>
@@ -92,7 +115,7 @@ export default function Home() {
           <div className="signal-orbit" aria-hidden="true"><span /><span /><span /></div>
         </section>
 
-        <ScrollExpand src={videoUrl} poster={videoPoster}>
+        <ScrollExpand src={videoUrl} fallback={videoPoster}>
           <div className="expand-overlay-copy">
             <span className="section-kicker">Synthetic heat-wave scenario</span>
             <h2>Five hours above the threshold.<br />One record to challenge.</h2>

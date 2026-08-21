@@ -1,11 +1,11 @@
 import { type ReactNode, useState } from "react";
 
-export function ScrollExpand({ src, poster, children }: { src: string; poster: string; children: ReactNode }) {
+export function ScrollExpand({ src, fallback, children }: { src: string; fallback: string; children: ReactNode }) {
   const [videoFailed, setVideoFailed] = useState(false);
   return <section className="scroll-expand" aria-label="Aerial field footage used for the synthetic heat-wave scenario">
     <div className="scroll-expand-sticky">
-      <div className="scroll-expand-frame" style={{ backgroundImage: `url(${poster})` }}>
-        {!videoFailed && <video src={src} poster={poster} autoPlay muted loop playsInline preload="auto" onError={() => setVideoFailed(true)} aria-label="Aerial field footage" />}
+      <div className="scroll-expand-frame">
+        {videoFailed ? <img className="scroll-expand-fallback" src={fallback} alt="Aerial wheat field" /> : <video src={src} autoPlay muted loop playsInline preload="auto" onError={() => setVideoFailed(true)} aria-label="Aerial field footage" />}
         <div className="scroll-expand-scrim" />
         <span className="field-footage-label"><i /> field footage · synthetic scenario</span>
         <div className="scroll-expand-content">{children}</div>

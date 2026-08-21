@@ -55,3 +55,8 @@
 - [x] Restore visibly playing full-bleed field video in the narrative stage while preserving the user’s current browser-based tuning values.
 - [x] Reduce Aurora Bars rendering density and scroll cost without removing the branded policy-engine atmosphere.
 - [x] Verify the full-bleed field video visibly renders and plays in the connected browser at desktop and mobile, then correct any remaining media-loading or overlay issue.
+- [x] Remove the static poster layer from the active field-video stage so the moving MP4 is the only visible media, with fallback reserved for playback failure.
+- [x] Preserve the user’s current saved tuning values as the baseline before extending the controls.
+- [x] Add detailed temporary tuning controls for each landing section’s typography, spacing, scale, side margins, and key element positions.
+- [x] Align the controlled Groq agent and external credential health check with the user-verified `openai/gpt-oss-120b` model, then validate the securely stored key.
+- [x] Audit every exposed visual-tuning CSS variable, then wire or remove any control that does not affect the stated landing element.
