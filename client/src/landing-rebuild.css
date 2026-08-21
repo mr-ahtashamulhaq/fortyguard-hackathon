@@ -23,9 +23,9 @@
 .landing-rebuild .agri-globe-fallback::before { position: absolute; inset: 3%; border: 1px solid color-mix(in oklab, var(--foreground) 14%, transparent); border-radius: 50%; content: ""; }
 .landing-rebuild .globe-grid { width: 78%; border-color: color-mix(in oklab, var(--foreground) 17%, transparent); }
 .landing-rebuild .globe-grid-two { width: 56%; border-color: color-mix(in oklab, #72bfe5 55%, transparent); }
-.landing-rebuild .globe-core { width: 11rem; height: 11rem; box-shadow: 0 0 0 18px color-mix(in oklab, #72bfe5 7%, transparent), 0 0 120px color-mix(in oklab, #72bfe5 34%, transparent); }
+.landing-rebuild .globe-core { display: none; }
 .landing-rebuild .agri-globe { inset: 0 !important; width: 100% !important; height: 100% !important; mask-image: radial-gradient(circle at 50% 50%, #000 38%, transparent 70%); }
-.landing-rebuild .agri-globe canvas { opacity: .48 !important; mix-blend-mode: multiply; }
+.landing-rebuild .agri-globe canvas { opacity: .7 !important; mix-blend-mode: multiply; }
 .landing-rebuild .globe-legend { top: 8%; right: 11%; color: color-mix(in oklab, var(--foreground) 68%, transparent); }
 .landing-rebuild .globe-caption { right: 9%; bottom: 9%; left: auto; max-width: 12rem; color: color-mix(in oklab, var(--foreground) 58%, transparent); text-align: right; }
 .hero-rule-rebuild { grid-column: 1 / -1; grid-template-columns: repeat(4, 1fr) !important; gap: 0; margin: 0; padding: 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
