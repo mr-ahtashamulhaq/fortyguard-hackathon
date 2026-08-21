@@ -48,7 +48,7 @@
 - [x] Make the field video visibly full-bleed in its narrative section and correct the low-idle-speed velocity animation.
 - [x] Replace the current FAQ interaction with the supplied motion accordion pattern and provide five accessible questions and answers.
 - [x] Remove the unintended horizontal bar from the judge-demo gradient section.
-- [ ] Add a temporary accessible visual-tuning panel with sliders for the key landing size, placement, scale, and motion controls; defer the GitHub push until the user locks the selected values.
+- [x] Add a temporary accessible visual-tuning panel with sliders for the key landing size, placement, scale, and motion controls; defer the GitHub push until the user locks the selected values.
 - [x] Replace the dock theme control with the supplied theme button and exact top-corner no-blur circular reveal transition.
 - [x] Rebuild falling-text physics and layout so the text can use the full footer field without overlapping footer metadata or collapsing into a narrow left column.
 - [x] Expand the temporary visual-tuning panel to cover each major landing section and its key visual elements.
@@ -60,3 +60,11 @@
 - [x] Add detailed temporary tuning controls for each landing section’s typography, spacing, scale, side margins, and key element positions.
 - [x] Align the controlled Groq agent and external credential health check with the user-verified `openai/gpt-oss-120b` model, then validate the securely stored key.
 - [x] Audit every exposed visual-tuning CSS variable, then wire or remove any control that does not affect the stated landing element.
+- [x] Move the FAQ introduction inward with a modest additional horizontal inset, matching the user-marked layout adjustment.
+- [x] Lock the approved browser-saved landing tuning values into the shipped design and remove the temporary visual-tuning controls.
+- [x] Implement the verified FortyGuard heatmap polling adapter with a server-only API key and normalized temperature observations.
+- [x] Connect the live FortyGuard adapter to the monitoring service while retaining explicit synthetic fallback and data-unavailable handling.
+- [x] Add focused tests for the FortyGuard adapter and validate the live integration safely with the provided API credential.
+- [x] Surface persisted FortyGuard readings, source labels, peak values, and last-observed timestamps in the portfolio and North Field detail views when verified live data exists.
+- [x] Add an integration test that covers the live-monitoring persistence/readback contract without issuing external heatmap requests.
+- [ ] Save the approved visual and backend milestone, then commit and push it to the `github` remote.

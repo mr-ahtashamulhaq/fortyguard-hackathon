@@ -1,7 +1,7 @@
 # FortyGuard API Integration Notes
 
 **Checked:** 21 August 2026.  
-**Status:** The adapter remains paused until a server-only `FORTYGUARD_API_KEY` is provided.
+**Status:** The server-only `FORTYGUARD_API_KEY` has passed a non-billable status-endpoint health check. AgriGuard now has an explicit live monitoring action that submits and polls three hourly `tcm` heatmaps. The synthetic demo remains the default judge flow.
 
 ## Verified official contract
 
@@ -9,13 +9,15 @@ The official API documentation describes API-key authentication through the `api
 
 ## AgriGuard adapter decision
 
-AgriGuard should use the FortyGuard heatmap workflow for a bounded hourly window, extract an agreed field-level temperature statistic from each completed result, normalize it into `{ observedAt, temperatureC, source: "fortyguard" }`, and store it in `temperature_observations`. The exact statistic, such as field mean or maximum temperature, must be agreed before enabling production monitoring because the documentation describes multiple aggregated temperature outputs.
+AgriGuard uses the FortyGuard heatmap workflow for the last three completed UTC hours. It requests `analytic_type: "tcm"`, extracts `result.stats_data.temperature_stats.mean`, normalizes it into `{ observedAt, temperatureC, source: "fortyguard" }`, and stores it in `temperature_observations`. The mean is the selected conservative, field-level statistic; it does not substitute a local maximum for the policy reading.
+
+The seed records currently store field centre points and hectares, not surveyed boundaries. The adapter therefore derives a small square GeoJSON polygon from that centre and area, labels its geometry source in the stored metadata, and fails closed if FortyGuard returns no temperature cells. A 21 August 2026 live request for the North Field seed completed with `n_cells: 0`, so no policy evaluation, evidence record, or simulated payout was created from it. The dashboard keeps the synthetic demo intact and reports the data as unavailable. Before live agricultural monitoring is enabled by default, replace these derived polygons with verified field GeoJSON boundaries in a FortyGuard-covered area.
 
 The synthetic heat-wave adapter remains the reliable demo path. It must not be removed when the live adapter is enabled.
 
 ## Required user input
 
-Provide a valid FortyGuard Enterprise API key. Store it only as `FORTYGUARD_API_KEY`; do not expose it to the browser or commit it.
+The project stores the API key only as `FORTYGUARD_API_KEY`; it is never exposed to the browser or committed.
 
 ## References
 

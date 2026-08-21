@@ -6,7 +6,7 @@ import { LandingDock } from "@/components/LandingDock";
 import { MotionFaq } from "@/components/MotionFaq";
 import { ScrollExpand } from "@/components/ScrollExpand";
 import { ScrollVelocity } from "@/components/ScrollVelocity";
-import { defaultLandingTuning, type LandingTuning, VisualTuner } from "@/components/VisualTuner";
+import { defaultLandingTuning, type LandingTuning } from "@/components/VisualTuner";
 import { ArrowDownRight, ArrowUpRight, CircleDotDashed, FileCheck2, Orbit, ShieldCheck, ThermometerSun } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 
@@ -173,7 +173,6 @@ export default function Home() {
         <div className="footer-meta"><span>AgriGuard / FortyGuard Hackathon 2026</span><span>Agentic (API + Agentic) track</span><span>Synthetic demo data · simulated payouts</span></div>
         <div className="footer-falling-field"><span className="section-kicker">Make the signal accountable</span><FallingText text="Trace every reading. Challenge every result." /></div>
       </footer>
-      <VisualTuner values={tuning} onChange={(patch) => setTuning(current => ({ ...current, ...patch }))} onReset={() => setTuning(defaultLandingTuning)} />
     </div>
   );
 }

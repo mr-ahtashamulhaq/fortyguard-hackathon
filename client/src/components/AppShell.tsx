@@ -10,7 +10,7 @@ const navItems = [
   { href: "/app/ledger", label: "Ledger", icon: BookOpenText },
 ];
 
-export function AppShell({ children, action }: { children: React.ReactNode; action?: React.ReactNode }) {
+export function AppShell({ children, action, sourceLabel = "Synthetic demo data" }: { children: React.ReactNode; action?: React.ReactNode; sourceLabel?: string }) {
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -30,7 +30,7 @@ export function AppShell({ children, action }: { children: React.ReactNode; acti
       <main className="app-main">
         <header className="app-topbar">
           <button className="mobile-menu" onClick={() => setMobileOpen(true)} aria-label="Open menu"><Menu size={19} /></button>
-          <div className="synthetic-pill"><span /> Synthetic demo data</div>
+          <div className="synthetic-pill"><span /> {sourceLabel}</div>
           <div className="app-top-actions"><ThemeToggle />{action}</div>
         </header>
         {children}
