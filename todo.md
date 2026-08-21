@@ -49,3 +49,6 @@
 - [x] Replace the current FAQ interaction with the supplied motion accordion pattern and provide five accessible questions and answers.
 - [x] Remove the unintended horizontal bar from the judge-demo gradient section.
 - [ ] Add a temporary accessible visual-tuning panel with sliders for the key landing size, placement, scale, and motion controls; defer the GitHub push until the user locks the selected values.
+- [x] Replace the dock theme control with the supplied theme button and exact top-corner no-blur circular reveal transition.
+- [x] Rebuild falling-text physics and layout so the text can use the full footer field without overlapping footer metadata or collapsing into a narrow left column.
+- [x] Expand the temporary visual-tuning panel to cover each major landing section and its key visual elements.

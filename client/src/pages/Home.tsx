@@ -34,11 +34,18 @@ export default function Home() {
   });
   useEffect(() => { localStorage.setItem("agriguard-landing-tuning", JSON.stringify(tuning)); }, [tuning]);
   const landingStyle = {
+    "--tune-dock-scale": tuning.dockScale,
     "--tune-hero-scale": tuning.heroScale,
     "--tune-globe-scale": tuning.globeScale,
     "--tune-hero-top": `${tuning.heroTop}rem`,
     "--tune-video-brightness": tuning.videoBrightness,
     "--tune-video-overlay": tuning.videoOverlay,
+    "--tune-signal-padding": `${tuning.signalPad}rem`,
+    "--tune-policy-padding": `${tuning.policyPad}rem`,
+    "--tune-evidence-padding": `${tuning.evidencePad}rem`,
+    "--tune-judge-height": `${tuning.judgeHeight}dvh`,
+    "--tune-judge-scale": tuning.judgeScale,
+    "--tune-faq-padding": `${tuning.faqPad}rem`,
     "--tune-footer-height": `${tuning.footerHeight}rem`,
     "--tune-footer-scale": tuning.footerScale,
   } as CSSProperties;
@@ -140,8 +147,8 @@ export default function Home() {
         </section>
       </main>
       <footer className="landing-footer landing-footer-rebuild">
-        <div><span className="section-kicker">Make the signal accountable</span><FallingText text="Trace every reading. Challenge every result." /></div>
         <div className="footer-meta"><span>AgriGuard / FortyGuard Hackathon 2026</span><span>Agentic (API + Agentic) track</span><span>Synthetic demo data · simulated payouts</span></div>
+        <div className="footer-falling-field"><span className="section-kicker">Make the signal accountable</span><FallingText text="Trace every reading. Challenge every result." /></div>
       </footer>
       <VisualTuner values={tuning} onChange={(patch) => setTuning(current => ({ ...current, ...patch }))} onReset={() => setTuning(defaultLandingTuning)} />
     </div>

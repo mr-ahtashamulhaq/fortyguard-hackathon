@@ -1,0 +1,28 @@
+.landing-rebuild .landing-dock { transform: translateX(-50%) scale(var(--tune-dock-scale, 1)); transform-origin: top center; }
+.landing-rebuild .theme-toggle.landing-dock-theme { display: grid; place-items: center; width: 2.4rem; height: 2.4rem; border: 1px solid rgba(255,255,255,.15); border-radius: 50%; padding: .34rem; background: #000; color: #fff; box-shadow: none; }
+.landing-rebuild .theme-toggle.landing-dock-theme:hover { transform: rotate(0) scale(1.04); }
+
+.landing-rebuild .signal-intro { padding-top: var(--tune-signal-padding, 10rem); }
+.landing-rebuild .policy-cinema-inner { padding-block: var(--tune-policy-padding, 10rem); }
+.landing-rebuild .evidence-moment { padding-block: var(--tune-evidence-padding, 12rem); }
+.landing-rebuild .judge-band { min-height: var(--tune-judge-height, 74dvh); }
+.landing-rebuild .judge-band-inner { transform: scale(var(--tune-judge-scale, 1)); }
+.landing-rebuild .faq-section-rebuild { padding-top: var(--tune-faq-padding, 11rem); padding-bottom: var(--tune-faq-padding, 11rem); }
+
+.landing-rebuild .landing-footer-rebuild { display: grid; grid-template-rows: auto 1fr; gap: 2.4rem; min-height: var(--tune-footer-height, 30rem); padding: 2rem max(2rem, calc((100vw - 1180px) / 2)) 3rem; }
+.landing-rebuild .footer-meta { grid-row: 1; grid-template-columns: repeat(3, 1fr); border-top: 0; border-bottom: 1px solid rgba(241,245,238,.18); padding-top: 0; padding-bottom: 1.25rem; }
+.landing-rebuild .footer-falling-field { display: grid; grid-row: 2; justify-items: center; align-content: center; min-width: 0; min-height: 0; text-align: center; }
+.landing-rebuild .falling-text { width: 100%; min-height: 20rem; }
+.landing-rebuild .falling-text > div:first-child { width: 100%; max-width: none; justify-content: center; font-size: calc(clamp(3.1rem, 6.2vw, 7rem) * var(--tune-footer-scale, 1)); text-align: center; }
+
+.landing-rebuild .visual-tuner { max-height: calc(100dvh - 2rem); overflow: auto; }
+.landing-rebuild .visual-tuner-group { margin-top: .9rem; border-top: 1px solid rgba(182,232,195,.14); padding-top: .75rem; }
+.landing-rebuild .visual-tuner-group h3 { margin: 0 0 .55rem; color: #b6e8c3; font-family: "Azeret Mono", monospace; font-size: .5rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; }
+
+@media (max-width: 640px) {
+  .landing-rebuild .theme-toggle.landing-dock-theme { width: 2.15rem; height: 2.15rem; }
+  .landing-rebuild .landing-footer-rebuild { min-height: var(--tune-footer-height, 30rem); padding: 1.5rem 1.25rem 2rem; }
+  .landing-rebuild .footer-meta { grid-template-columns: 1fr; text-align: left; }
+  .landing-rebuild .falling-text { min-height: 15rem; }
+  .landing-rebuild .visual-tuner-group { margin-top: .65rem; }
+}

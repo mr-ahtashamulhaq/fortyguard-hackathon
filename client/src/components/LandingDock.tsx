@@ -1,7 +1,7 @@
-import { FileCheck2, Home, Moon, Orbit, Sun, ThermometerSun } from "lucide-react";
+import { FileCheck2, Home, Orbit, ThermometerSun } from "lucide-react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { type ReactNode, useRef } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 type DockItem = { label: string; href: string; icon: ReactNode };
 
@@ -21,7 +21,6 @@ function DockButton({ item, mouseX }: { item: DockItem; mouseX: ReturnType<typeo
 
 export function LandingDock() {
   const mouseX = useMotionValue(Infinity);
-  const { theme, toggleTheme } = useTheme();
   const items: DockItem[] = [
     { label: "Top", href: "#top", icon: <Home size={17} strokeWidth={1.5} /> },
     { label: "Signal", href: "#signal", icon: <ThermometerSun size={17} strokeWidth={1.5} /> },
@@ -32,7 +31,7 @@ export function LandingDock() {
     <nav className="landing-dock" aria-label="Landing page navigation" onMouseMove={event => mouseX.set(event.clientX)} onMouseLeave={() => mouseX.set(Infinity)}>
       <span className="landing-dock-brand"><span className="wordmark-mark" />AgriGuard</span>
       <div className="landing-dock-actions">{items.map(item => <DockButton item={item} mouseX={mouseX} key={item.label} />)}</div>
-      <button className="landing-dock-theme" type="button" onClick={toggleTheme} aria-label="Toggle color theme">{theme === "light" ? <Moon size={16} /> : <Sun size={16} />}</button>
+      <ThemeToggle className="landing-dock-theme" />
       <a className="landing-dock-demo" href="/app">Open demo</a>
     </nav>
   );
