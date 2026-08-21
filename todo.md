@@ -16,7 +16,7 @@
 - [x] Configure the California field as the primary live observation source while retaining synthetic data only as an explicit fallback.
 - [x] Update the operational labels and integration notes with the selected California field provenance and live-data validation result.
 - [x] Audit field detail, evidence, and any remaining North Field labels so verified California FortyGuard data is represented consistently outside the portfolio.
-- [ ] Checkpoint and push the verified California primary-source configuration, source-aware evidence route, and operational map update to the `github` remote.
+- [x] Checkpoint and push the verified California primary-source configuration, source-aware evidence route, and operational map update to the `github` remote.
 - [x] Replace legacy user-visible `north` wording in the live agent explanation with the Fresno Public Wheat Field name.
 - [x] Add source-aware loading states so live evidence and field-detail routes do not briefly present synthetic North Field fallback content while verified data is loading.
 - [x] Re-verify the field-detail and verified-evidence routes after California source-label cleanup.
