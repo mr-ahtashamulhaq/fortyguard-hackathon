@@ -20,6 +20,7 @@
 .landing-rebuild .scroll-expand-sticky { height: var(--tune-video-height, 100dvh); }
 .landing-rebuild .scroll-expand-frame { clip-path: none; background: #173f30; }
 .landing-rebuild .scroll-expand-frame video, .landing-rebuild .scroll-expand-fallback { position: absolute; inset: 0; z-index: 0; display: block; width: 100%; height: 100%; object-fit: cover; transform: none; filter: saturate(1.12) contrast(1.03) brightness(var(--tune-video-brightness, 1)); }
+.landing-rebuild .scroll-expand-signal-fallback { background: radial-gradient(circle at 68% 24%, rgba(114,191,229,.45), transparent 18%), linear-gradient(125deg, #071c14 0%, #1e533b 46%, #9a8352 100%); }
 .landing-rebuild .scroll-expand-scrim { z-index: 1; opacity: var(--tune-video-overlay, .22); background: linear-gradient(102deg, rgba(0,14,9,.76) 0%, rgba(0,14,9,.18) 48%, rgba(0,14,9,.02) 78%), linear-gradient(to top, rgba(0,10,7,.38), transparent 58%); }
 .landing-rebuild .scroll-expand-content { z-index: 2; transform: translateX(var(--tune-video-copy-side, 0)) scale(var(--tune-video-copy-scale, 1)); transform-origin: left center; }
 .landing-rebuild .field-footage-label { position: absolute; z-index: 3; top: 2rem; right: max(2rem, calc((100vw - 1320px) / 2)); display: inline-flex; align-items: center; gap: .55rem; color: rgba(255,255,255,.9); font-family: "Azeret Mono", monospace; font-size: .55rem; letter-spacing: .1em; text-transform: uppercase; }

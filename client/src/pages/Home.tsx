@@ -10,8 +10,9 @@ import { defaultLandingTuning, type LandingTuning } from "@/components/VisualTun
 import { ArrowDownRight, ArrowUpRight, CircleDotDashed, FileCheck2, Orbit, ShieldCheck, ThermometerSun } from "lucide-react";
 import { useEffect, useState, type CSSProperties } from "react";
 
-const videoUrl = "/manus-storage/agriguard-aerial-fields-final-web_95a93812.mp4";
-const videoPoster = "/manus-storage/agriguard-aerial-fields-final-poster_ce730a0b.jpg";
+const isVercelBuild = import.meta.env.VITE_DEPLOYMENT_TARGET === "vercel";
+const videoUrl = import.meta.env.VITE_LANDING_VIDEO_URL ?? (isVercelBuild ? undefined : "/manus-storage/agriguard-aerial-fields-final-web_95a93812.mp4");
+const videoPoster = import.meta.env.VITE_LANDING_POSTER_URL ?? (isVercelBuild ? undefined : "/manus-storage/agriguard-aerial-fields-final-poster_ce730a0b.jpg");
 
 const policySteps = [
   { number: "01", title: "Observe", icon: ThermometerSun, copy: "Hourly temperature readings are normalized and attached to the field record." },
