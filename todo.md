@@ -36,6 +36,10 @@
 - [x] Validate the strengthened verified-evidence route and package the user-facing submission materials.
 - [x] Add explicit error and not-found states so a missing live evidence record never presents synthetic fallback content.
 - [x] Add focused coverage for verified-evidence route states and decision-chain facts.
+- [x] Use the remaining FortyGuard daily heatmap quota for controlled integration checks against the documented public Fresno demo boundary.
+- [x] Capture request, completion, temperature-cell, and policy-evaluation outcomes without presenting any new real payout.
+- [x] Document the quota-test evidence and revalidate the project after the external service exercise.
+- [x] Read FortyGuard’s official post-run credit-usage endpoint and record the billing-cycle totals and daily-counter limitation accurately.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
