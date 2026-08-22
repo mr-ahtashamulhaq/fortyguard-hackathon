@@ -10,7 +10,7 @@ The monitoring flow uses a Groq tool-calling agent with a small, allow-listed se
 
 | Layer | Responsibility | Trust boundary |
 |---|---|---|
-| Temperature adapter | Returns normalized hourly readings with a source label. | Synthetic data is used until the FortyGuard contract is available. |
+| Temperature adapter | Returns normalized hourly readings with a source label. | The primary demo reads a verified historical FortyGuard window for a public Fresno County wheat field; synthetic data remains an explicit judge-demo fallback. |
 | Policy engine | Applies the fixed heat rule and payout bands. | Pure TypeScript; no LLM call. |
 | Monitoring agent | Calls only server-defined tools and writes an explanation. | Cannot change the rule, source data, stage, band, or amount. |
 | Supabase Postgres | Stores fields, policies, observations, evaluations, evidence, payouts, and audit entries. | Server uses the secret key; the browser never receives it. |
@@ -44,7 +44,7 @@ AgriGuard has two deliberate surfaces.
 | `/` | Animated landing page that explains the policy, evidence trail, and Agentic-track value. |
 | `/app` | Portfolio dashboard with Leaflet and OpenStreetMap field map, field states, and a judge demo control. |
 | `/app/fields/north` | Deterministic temperature and heat-score charts with a visible 34 °C threshold. |
-| `/app/evidence/demo-042` | Structured event evidence, qualifying observations, policy values, and agent explanation. |
+| `/app/evidence/:code` | Structured event evidence, qualifying observations, policy values, source label, and agent explanation. |
 | `/app/ledger` | Idempotent simulated payout ledger with a permanent simulation disclaimer. |
 
 ## Judge demo flow
@@ -59,7 +59,9 @@ The complete demo is designed to take less than three minutes.
 
 ## Data sources and fallback behavior
 
-FortyGuard temperature data is intended to be the primary source. The project includes a swappable `FortyGuardTemperatureAdapter`, but the provider API contract is still pending. The deployed hackathon flow uses `SyntheticDemoTemperatureAdapter` and labels every affected route accordingly.
+The primary FortyGuard demonstration uses a public California Department of Water Resources 2023 crop-map polygon for a Fresno County wheat field. It retrieves a verified three-hour historical window from 15 July 2024, normalizes the returned hourly field-mean temperatures, and evaluates it through the same deterministic policy engine. The public boundary is clearly a demo configuration, not an insured farmer’s legal field boundary.
+
+The separate judge-demo control remains synthetic by design. It gives judges a fast, repeatable five-hour heat-wave scenario even if the external API is slow or unavailable, and all synthetic views remain visibly labelled.
 
 The Groq explanation path is intentionally optional for the decision. If Groq is rate-limited, unavailable, or returns invalid structured content, AgriGuard writes a template explanation with the same stable shape. The demo remains operational because the policy engine and storage path do not depend on model output.
 
@@ -70,7 +72,7 @@ The Groq explanation path is intentionally optional for the decision. If Groq is
 | Ineligible crop stage | Safe result; no payout. |
 | Groq failure | Template explanation; deterministic result remains unchanged. |
 | Repeat scenario request | Existing evidence and payout are returned; no duplicate payout row. |
-| FortyGuard API unavailable | Synthetic demo remains available and clearly labeled. |
+| FortyGuard API unavailable or returns no cells | No live policy result is created; the clearly labelled synthetic judge demo remains available. |
 
 ## Stack
 
@@ -107,7 +109,7 @@ Set the following project environment variables. Do not commit a local `.env` fi
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key. | Yes |
 | `SUPABASE_SECRET_KEY` | Server-only key for controlled writes and RLS bypass. | Yes |
 | `GROQ_API_KEY` | Server-only key for the controlled explanation agent. | Recommended; a template fallback exists. |
-| `FORTYGUARD_TEMPERATURE_API_URL` | Future FortyGuard endpoint. | No, until the API contract is released. |
+| `FORTYGUARD_API_KEY` | Server-only authenticated access for verified FortyGuard heatmap requests. | Required for the verified-history demo; synthetic judge demo remains available without it. |
 
 Run the project checks before a demo or pull request.
 
@@ -161,10 +163,9 @@ Add the following variables to the Vercel project before a deployment. They must
 | `VITE_SUPABASE_PUBLISHABLE_KEY` | Required in both preview and production builds. |
 | `SUPABASE_SECRET_KEY` | Required server-side at runtime. Never prefix it with `VITE_`. |
 | `GROQ_API_KEY` | Recommended server-side at runtime. The deterministic template fallback remains available if it is omitted or rate-limited. |
-| `FORTYGUARD_TEMPERATURE_API_URL` | Leave unset while synthetic demo data is the active source. |
-| `FORTYGUARD_API_KEY` | **Deferred.** Add only after FortyGuard issues a valid key; keep it server-side and rerun the adapter checks before enabling it. |
+| `FORTYGUARD_API_KEY` | Required server-side for the verified Fresno County history demo. Never prefix it with `VITE_`. |
 
-> **Hackathon deployment state:** the public demo is ready to deploy with its controlled Supabase-backed synthetic scenario. Live FortyGuard reads stay disabled until the provider key is available, and every affected product view keeps its synthetic-data label until then.
+> **Hackathon deployment state:** the public demo includes two clearly separated flows: a repeatable synthetic judge scenario and a verified FortyGuard historical California wheat-field flow. Every payout is simulated; the live-data evidence route shows its source and observation timestamps.
 
 ## References
 

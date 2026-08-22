@@ -22,6 +22,13 @@
 - [x] Re-verify the field-detail and verified-evidence routes after California source-label cleanup.
 - [x] Persist and surface the latest verified live evidence record server-side so the portfolio retains the Fresno/FortyGuard evidence link after reloads.
 - [x] Re-verify the refreshed portfolio CTA and source labels after adding the persistent verified evidence lookup.
+- [x] Increase the approved landing hero headline character spacing without changing its line breaks or visual scale.
+- [x] Prevent Leaflet map tiles and controls from appearing above the monitoring-agent modal during a scenario run.
+- [x] Verify the repaired desktop and mobile landing/dashboard interaction states.
+- [x] Verify the mobile dashboard monitoring overlay remains above Leaflet tiles and controls during a scenario run.
+- [x] Research the official FortyGuard hackathon evaluation criteria and assess AgriGuard candidly against them.
+- [x] Identify and prioritize the highest-impact product, demo, and submission improvements for the Agentic track.
+- [x] Update stale README statements that still describe FortyGuard as unavailable or synthetic-only, so submission documentation matches the verified California live-data implementation.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.

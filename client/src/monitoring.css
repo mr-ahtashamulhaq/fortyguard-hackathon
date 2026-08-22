@@ -9,7 +9,7 @@
 .scenario-control button span { padding-right: .55rem; border-right: 1px solid color-mix(in oklab,#10221d 18%,transparent); color: #2e6b55; font-family: "Azeret Mono",monospace; font-size: .57rem; text-transform: uppercase; }
 .scenario-control-actions { display: grid; justify-items: end; gap: .55rem; }.scenario-control .live-monitor-button { color: #f1f5ee; border: 1px solid color-mix(in oklab,#f1f5ee 40%,transparent); background: transparent; }.scenario-control .live-monitor-button span { color: #b6e8c3; border-color: color-mix(in oklab,#f1f5ee 22%,transparent); }.live-monitor-status { max-width: 19rem; margin: 0; color: color-mix(in oklab,#f1f5ee 76%,transparent); font-size: .66rem; line-height: 1.45; text-align: right; }
 
-.monitor-overlay { position: fixed; z-index: 40; inset: 0; display: grid; place-items: center; padding: 1rem; background: color-mix(in oklab,#10221d 48%,transparent); backdrop-filter: blur(8px); }
+.monitor-overlay { position: fixed; z-index: 2000; inset: 0; display: grid; place-items: center; padding: 1rem; background: color-mix(in oklab,#10221d 48%,transparent); backdrop-filter: blur(8px); }
 .monitor-card { position: relative; width: min(100%,490px); padding: 1.6rem; border: 1px solid color-mix(in oklab,#f1f5ee 15%,transparent); border-radius: 1.45rem; background: #10221d; color: #f1f5ee; box-shadow: 0 26px 70px rgba(0,0,0,.3); }
 .monitor-close { position: absolute; top: .85rem; right: .85rem; display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%; color: #f1f5ee; background: color-mix(in oklab,#f1f5ee 10%,transparent); }
 .monitor-agent { display: flex; align-items: center; gap: .8rem; }
