@@ -43,8 +43,8 @@
 - [x] Inspect the connected Vercel account and determine the compatible deployment shape for the current React, Express, tRPC, and Supabase project.
 - [x] Add Vercel deployment configuration and environment-variable documentation without exposing secrets.
 - [x] Audit the Vercel environment-variable list against browser and server usage, then correct and revalidate the deployment documentation.
-- [ ] Revalidate the Vercel-targeted production build and push every complete checkpoint to the `github` remote.
-- [ ] Provide the Vercel deployment result or exact user deployment steps if direct release is not permitted.
+- [x] Revalidate the Vercel-targeted production build and push every complete checkpoint to the `github` remote.
+- [x] Provide the Vercel deployment result or exact user deployment steps if direct release is not permitted.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
