@@ -1,0 +1,85 @@
+.decision-chain {
+  padding: 1.45rem 2rem;
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklab, #2e6b55 4%, var(--card));
+}
+
+.decision-chain-heading {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  color: #2e6b55;
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.decision-chain-heading small {
+  margin-left: auto;
+  color: var(--muted-foreground);
+  font-family: "Azeret Mono", monospace;
+  font-size: .55rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+
+.decision-chain-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: .6rem;
+  align-items: center;
+  margin-top: .95rem;
+}
+
+.decision-chain-step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .65rem;
+  min-height: 6.6rem;
+  padding: .9rem;
+  border: 1px solid var(--border);
+  border-radius: .85rem;
+  background: var(--card);
+}
+
+.decision-chain-step > svg { margin-top: .08rem; }
+.decision-chain-step.observed > svg { color: #c85a2b; }
+.decision-chain-step.rule > svg { color: #b58124; }
+.decision-chain-step.result > svg { color: #2e6b55; }
+
+.decision-chain-step small {
+  display: block;
+  color: var(--muted-foreground);
+  font-family: "Azeret Mono", monospace;
+  font-size: .53rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.decision-chain-step strong {
+  display: block;
+  margin-top: .3rem;
+  font-size: .71rem;
+  line-height: 1.35;
+}
+
+.decision-chain-step p {
+  margin-top: .35rem;
+  color: var(--muted-foreground);
+  font-size: .62rem;
+  line-height: 1.45;
+}
+
+.decision-chain-arrow { color: color-mix(in oklab, #2e6b55 62%, var(--muted-foreground)); }
+
+.evidence-state { max-width: 760px; padding-top: 5rem; }
+.evidence-state p { max-width: 44rem; margin-top: 1rem; color: var(--muted-foreground); line-height: 1.65; }
+.evidence-state-link { display: inline-flex; margin-top: 1.5rem; color: #2e6b55; font-size: .78rem; font-weight: 800; text-decoration: underline; text-underline-offset: .28rem; }
+
+@media (max-width: 680px) {
+  .decision-chain { padding: 1.2rem 1.5rem; }
+  .decision-chain-heading { align-items: flex-start; flex-wrap: wrap; }
+  .decision-chain-heading small { width: 100%; margin-left: 0; }
+  .decision-chain-flow { grid-template-columns: 1fr; gap: .45rem; }
+  .decision-chain-step { min-height: 0; }
+  .decision-chain-arrow { justify-self: center; transform: rotate(90deg); }
+}

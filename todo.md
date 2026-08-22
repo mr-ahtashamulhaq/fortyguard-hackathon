@@ -29,6 +29,13 @@
 - [x] Research the official FortyGuard hackathon evaluation criteria and assess AgriGuard candidly against them.
 - [x] Identify and prioritize the highest-impact product, demo, and submission improvements for the Agentic track.
 - [x] Update stale README statements that still describe FortyGuard as unavailable or synthetic-only, so submission documentation matches the verified California live-data implementation.
+- [x] Design a compact “why this decision” heat-to-policy evidence visual for the verified FortyGuard event.
+- [x] Implement the evidence visual in the live verified evidence route without weakening source, simulation, or deterministic-policy labels.
+- [x] Write a rehearsable 75-second judge demo script that centres on one heat-to-decision flow.
+- [x] Prepare a practical backup-demo recording plan, including preflight data and route checks.
+- [x] Validate the strengthened verified-evidence route and package the user-facing submission materials.
+- [x] Add explicit error and not-found states so a missing live evidence record never presents synthetic fallback content.
+- [x] Add focused coverage for verified-evidence route states and decision-chain facts.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
