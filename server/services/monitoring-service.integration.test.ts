@@ -1,4 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+
+vi.mock("./monitoring-agent", async () => {
+  const actual = await vi.importActual<typeof import("./monitoring-agent")>("./monitoring-agent");
+  return { ...actual, createAgentExplanation: async (input: Parameters<typeof actual.createAgentExplanation>[0]) => actual.createTemplateExplanation(input) };
+});
+
 import { getEvidenceRecord, getPayoutLedger, runSyntheticHeatWaveScenario } from "./monitoring-service";
 
 const hasSupabaseConfiguration = Boolean(process.env.VITE_SUPABASE_URL && process.env.SUPABASE_SECRET_KEY);

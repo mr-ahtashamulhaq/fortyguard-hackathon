@@ -45,6 +45,14 @@
 - [x] Audit the Vercel environment-variable list against browser and server usage, then correct and revalidate the deployment documentation.
 - [x] Revalidate the Vercel-targeted production build and push every complete checkpoint to the `github` remote.
 - [x] Provide the Vercel deployment result or exact user deployment steps if direct release is not permitted.
+- [x] Consume the 28 remaining daily FortyGuard heatmaps reported by the user through the verified Fresno monitoring flow.
+- [x] Submit 28 distinct completed historical hours for the verified Fresno polygon because repeated identical hours did not change the daily creation counter.
+- [x] Verify the daily-quota target from the user’s 2/30 starting counter and ensure repeated monitoring does not create a duplicate simulated payout.
+- [x] Document the corrected daily-quota result and revalidate the project after the live exercise.
+- [x] Verify the current-day FortyGuard usage with the documented custom-range endpoint and record the exact heatmap count.
+- [x] Read back AgriGuard’s verified evidence and ledger to confirm the corrected external quota exercise created no duplicate live simulated payout.
+- [x] Correct the daily-quota wording to distinguish direct controlled API requests from app monitoring runs, then revalidate the full project.
+- [x] Make the synthetic monitoring integration test deterministic by removing its runtime dependence on the external explanation provider.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
