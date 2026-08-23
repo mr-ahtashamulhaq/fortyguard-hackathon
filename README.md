@@ -1,6 +1,6 @@
 # AgriGuard
 
-<a href="https://agriguard-eta.vercel.app" target="_blank" rel="noopener noreferrer"><img src="https://img.shields.io/badge/Live%20Demo-Open%20AgriGuard-1f6f50?style=for-the-badge" alt="Live Demo — Open AgriGuard"></a>
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20AgriGuard-1f6f50?style=for-the-badge)](https://agriguard-eta.vercel.app)
 [![FortyGuard Hackathon 2026](https://img.shields.io/badge/FortyGuard%20Hackathon-2026-0d3428?style=for-the-badge)](https://www.fortyguard.com/hackathon26)
 [![Track](https://img.shields.io/badge/Track-Agentic%20(API%20%2B%20Agentic)-d97706?style=for-the-badge)](https://www.fortyguard.com/hackathon26)
 
