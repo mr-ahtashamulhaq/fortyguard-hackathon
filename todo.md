@@ -68,6 +68,18 @@
 - [x] Confirm the ownership and persistence limits of the current Manus CDN media URLs used by Vercel.
 - [x] Document a free asset-hosting path that keeps the AgriGuard landing media under the user’s own account and repository control.
 - [x] Add the owned-media hosting guidance to the Vercel deployment documentation and publish it to GitHub.
+- [x] Identify every landing video and image reference, explain its role, and confirm whether it is visibly rendered in the current site.
+- [x] Research and provide August 2026 official micro-steps for uploading the landing video to a user-owned public Vercel Blob store.
+- [x] Deliver the verified landing-media explanation and August 2026 Vercel Blob upload procedure to the user.
+- [x] Open the GitHub README and public Vercel demo in a fresh browser context, including the portfolio and verified evidence routes.
+- [x] Confirm no deployment-protection, authentication, or route-access barrier prevents a judge from opening the linked demo.
+- [x] Record the public-access verification result for the submitted live demo URL.
+- [x] Diagnose why the deployed `/app/evidence/LIVE-FRESNO-2024071514` route reports that the verified record is unavailable.
+- [ ] Restore a public verified-evidence route or replace the README judge link with an available, clearly labelled demonstration route.
+- [ ] Re-test the GitHub README, landing, portfolio, and verified evidence flow without session-dependent access.
+- [x] Bundle the serverless API application explicitly for Vercel so the deployed function no longer imports an absent TypeScript module at runtime.
+- [x] Add regression coverage for the Vercel API build artifact and deployment configuration.
+- [x] Add a durable automated smoke test that builds and imports the Vercel serverless API artifact within the repository validation flow.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
