@@ -75,12 +75,15 @@
 - [x] Confirm no deployment-protection, authentication, or route-access barrier prevents a judge from opening the linked demo.
 - [x] Record the public-access verification result for the submitted live demo URL.
 - [x] Diagnose why the deployed `/app/evidence/LIVE-FRESNO-2024071514` route reports that the verified record is unavailable.
-- [ ] Restore a public verified-evidence route or replace the README judge link with an available, clearly labelled demonstration route.
-- [ ] Re-test the GitHub README, landing, portfolio, and verified evidence flow without session-dependent access.
+- [x] Restore a public verified-evidence route or replace the README judge link with an available, clearly labelled demonstration route.
+- [x] Re-test the GitHub README, landing, portfolio, and verified evidence flow without session-dependent access.
 - [x] Bundle the serverless API application explicitly for Vercel so the deployed function no longer imports an absent TypeScript module at runtime.
 - [x] Add regression coverage for the Vercel API build artifact and deployment configuration.
 - [x] Add a durable automated smoke test that builds and imports the Vercel serverless API artifact within the repository validation flow.
-- [ ] Ensure the README Live Demo button opens the canonical Vercel URL in a new browser tab or window.
+- [x] Confirm GitHub’s rendering limitation for new-tab targets and retain the direct Live Demo badge to the canonical Vercel URL.
+- [x] Browser-test the public `/app` portfolio and `/app/evidence/LIVE-FRESNO-2024071514` route after the API fix without any login.
+- [x] Record that the post-fix public evidence page displays the stored Fresno/FortyGuard decision chain and simulated payout details.
+- [x] Complete one continuous public browser flow from the GitHub README Live Demo link to the landing page, portfolio, and verified evidence page.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
