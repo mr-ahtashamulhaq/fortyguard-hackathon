@@ -12,6 +12,8 @@ export function ScrollExpand({ src, fallback, children }: { src?: string; fallba
 
   const mediaSource = resolveRetryableMediaSource(src, retryAttempt);
   const retryVideo = () => {
+    // A single browser media error must not permanently discard an otherwise
+    // reachable public Blob source. Re-mount once with a fresh cache key.
     if (retryAttempt === 0) {
       setRetryAttempt(1);
       return;

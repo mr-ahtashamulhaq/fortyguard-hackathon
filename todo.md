@@ -84,10 +84,11 @@
 - [x] Browser-test the public `/app` portfolio and `/app/evidence/LIVE-FRESNO-2024071514` route after the API fix without any login.
 - [x] Record that the post-fix public evidence page displays the stored Fresno/FortyGuard decision chain and simulated payout details.
 - [x] Complete one continuous public browser flow from the GitHub README Live Demo link to the landing page, portfolio, and verified evidence page.
-- [ ] Diagnose why the deployed Vercel Blob landing video falls back to its poster despite the configured public MP4 URL.
-- [ ] Correct the deployed landing-video integration and add focused regression coverage.
-- [ ] Create and integrate a branded AgriGuard favicon.
-- [ ] Validate the updated build, push the changes to `github/main`, and verify the resulting Vercel production deployment.
+- [x] Diagnose why the deployed Vercel Blob landing video falls back to its poster despite the configured public MP4 URL.
+- [x] Correct the deployed landing-video integration and add focused regression coverage.
+- [x] Create and integrate a branded AgriGuard favicon.
+- [x] Validate the updated build, push the changes to `github/main`, and verify the resulting Vercel production deployment.
+- [x] Document the confirmed client-side single-error fallback cause and its evidence before finalizing the media incident.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.

@@ -59,6 +59,12 @@ Vercel Blob is free within the Vercel Hobby plan limits. If the account reaches 
 
 The project source remains in GitHub, the deployed application and public media remain in Vercel, and operational data remains in Supabase. Keep API keys only in Vercel environment variables.
 
+### Media Fallback Behavior
+
+The public Blob media incident was **not** caused by an absent URL, an incorrect MIME type, or a server runtime error. The MP4 and poster returned public HTTP 200 responses, the client bundle contained both configured URLs, and the browser could load the MP4 metadata. The original client implementation immediately replaced the video with the poster after its first browser `error` event. That made a transient client-side media error look like a permanent broken video.
+
+AgriGuard now retains the poster during loading and retries the public MP4 once with a cache-busting URL before using the image-only fallback. The image fallback is therefore reserved for a second failed media attempt or a missing public video URL. This keeps the page readable while preserving the video path when the source is reachable.
+
 ## Deploy From GitHub
 
 1. Open [Vercel](https://vercel.com/new).
