@@ -64,7 +64,7 @@
 - [x] Rewrite the README as a public-facing FortyGuard Hackathon project document for judges and GitHub visitors.
 - [x] Set a concise public repository description that states the product, FortyGuard data role, and simulated-payout boundary.
 - [x] Validate the documentation update and push the complete final state to GitHub.
-- [ ] Push the rewritten public README and final checklist metadata to `github/main`, then confirm the working tree is clean.
+- [x] Push the rewritten public README and final checklist metadata to `github/main`, then confirm the working tree is clean.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
