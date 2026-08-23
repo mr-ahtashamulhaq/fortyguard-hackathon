@@ -60,7 +60,7 @@
 - [x] Audit every tracked repository file and classify it as runtime, test, deployment, judge evidence, or removable working artifact.
 - [x] Remove only confirmed temporary, agent-only, or redundant working files without affecting the submission build or proof.
 - [x] Update the README with the live Vercel demo badge and concise submission-focused documentation.
-- [ ] Revalidate the cleaned repository and push the final submission state to GitHub.
+- [x] Revalidate the cleaned repository and push the final submission state to GitHub.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
