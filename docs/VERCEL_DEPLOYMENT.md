@@ -37,6 +37,28 @@ The Manus preview serves the landing video from Manus storage. Vercel cannot use
 
 Upload the approved MP4 and poster to a public asset host, such as Vercel Blob, then set `VITE_LANDING_VIDEO_URL` and `VITE_LANDING_POSTER_URL`. The product flow remains functional without these two optional visual URLs.
 
+### Asset Ownership
+
+The temporary `files.manuscdn.com` URLs used during the first Vercel deployment are Manus-managed upload URLs. Vercel reads the MP4 and poster directly from that CDN when the landing page loads. The files are not copied into the Vercel deployment or the GitHub repository.
+
+These URLs remain available while the related Manus-managed storage remains available. They are not the correct permanent home for a project that the repository owner must control. Do not use them as the long-term landing-media URLs.
+
+### Free User-Owned Media Path
+
+Use a **public Vercel Blob store** in the same Vercel account that owns the AgriGuard deployment. This keeps the landing media, deployment, environment variables, and access control in one user-owned Vercel account.
+
+1. Open **AgriGuard → Storage** in Vercel.
+2. Select **Create Database**, then select **Blob**.
+3. Set the store access to **Public** and create the store.
+4. Upload the approved MP4 and JPEG poster from your computer.
+5. Copy the two generated URLs. Public Blob URLs use the `public.blob.vercel-storage.com` domain.[3]
+6. Replace the two landing-media variables in the AgriGuard Vercel project with these user-owned URLs.
+7. Redeploy the project.
+
+Vercel Blob is free within the Vercel Hobby plan limits. If the account reaches a limit, Vercel disables Blob access until the rolling 30-day limit expires; it does not charge extra usage on Hobby.[4]
+
+The project source remains in GitHub, the deployed application and public media remain in Vercel, and operational data remains in Supabase. Keep API keys only in Vercel environment variables.
+
 ## Deploy From GitHub
 
 1. Open [Vercel](https://vercel.com/new).
@@ -57,3 +79,7 @@ The live monitoring action makes three sequential FortyGuard heatmap requests. T
 [1] [Vercel project configuration](https://vercel.com/docs/project-configuration/vercel-json)
 
 [2] [Vercel function duration](https://vercel.com/docs/functions/configuring-functions/duration)
+
+[3] [Vercel Blob public storage](https://vercel.com/docs/vercel-blob/public-storage)
+
+[4] [Vercel Blob pricing and Hobby limits](https://vercel.com/docs/vercel-blob/usage-and-pricing)

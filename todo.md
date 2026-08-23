@@ -65,6 +65,9 @@
 - [x] Set a concise public repository description that states the product, FortyGuard data role, and simulated-payout boundary.
 - [x] Validate the documentation update and push the complete final state to GitHub.
 - [x] Push the rewritten public README and final checklist metadata to `github/main`, then confirm the working tree is clean.
+- [x] Confirm the ownership and persistence limits of the current Manus CDN media URLs used by Vercel.
+- [x] Document a free asset-hosting path that keeps the AgriGuard landing media under the user’s own account and repository control.
+- [ ] Add the owned-media hosting guidance to the Vercel deployment documentation and publish it to GitHub.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
