@@ -97,7 +97,7 @@
 - [x] Create an audited `demo.md` with a teammate-ready three-minute AgriGuard recording script and checklist.
 - [x] Read back `demo.md` and complete the final anti-slop audit.
 - [x] Save a checkpoint that includes `demo.md` and its related checklist update.
-- [ ] Push the teammate guide and final checklist metadata to `github/main`, then confirm the working tree is clean.
+- [ ] Push the final `todo.md` checklist update to `github/main`, then confirm the working tree is clean.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
