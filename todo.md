@@ -53,6 +53,14 @@
 - [x] Read back AgriGuard’s verified evidence and ledger to confirm the corrected external quota exercise created no duplicate live simulated payout.
 - [x] Correct the daily-quota wording to distinguish direct controlled API requests from app monitoring runs, then revalidate the full project.
 - [x] Make the synthetic monitoring integration test deterministic by removing its runtime dependence on the external explanation provider.
+- [x] Inspect the deployed Vercel landing route and deployment configuration to diagnose why the field video falls back to its static treatment.
+- [x] Provide or configure a public HTTPS landing-video URL and optional poster URL for the Vercel build without using Manus-only storage paths.
+- [x] Publish the approved optimized MP4 and poster at stable public URLs suitable for Vercel’s deployed landing page.
+- [x] Verify the deployed Vercel landing video after the configuration update and document the final resolution.
+- [x] Audit every tracked repository file and classify it as runtime, test, deployment, judge evidence, or removable working artifact.
+- [x] Remove only confirmed temporary, agent-only, or redundant working files without affecting the submission build or proof.
+- [x] Update the README with the live Vercel demo badge and concise submission-focused documentation.
+- [ ] Revalidate the cleaned repository and push the final submission state to GitHub.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.

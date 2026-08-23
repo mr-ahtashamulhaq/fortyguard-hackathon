@@ -1,117 +1,136 @@
 # AgriGuard
 
-AgriGuard is a **transparent parametric heat-insurance prototype for wheat fields**. It turns hourly temperature observations into a deterministic policy result, an evidence record, and a **simulated** payout entry. The prototype was built for the **FortyGuard Global AI Hackathon 2026** and is submitted in the **Agentic (API + Agentic)** track.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20AgriGuard-1f6f50?style=for-the-badge)](https://agriguard-eta.vercel.app)
+[![Track](https://img.shields.io/badge/FortyGuard%20Hackathon%202026-Agentic%20(API%20%2B%20Agentic)-0d3428?style=for-the-badge)](https://www.fortyguard.com/hackathon26)
 
-> **Safety boundary:** AgriGuard does not sell insurance, issue a policy, approve a real claim, or transfer money. Every payout amount, status, and ledger entry is explicitly simulated.
+**[Open the live demo](https://agriguard-eta.vercel.app)**
 
-## Why this project fits the Agentic track
+AgriGuard is a transparent parametric heat-insurance prototype for wheat. It turns hourly temperature observations into a fixed policy result, an evidence record, and a simulated payout entry.
 
-The monitoring flow uses a Groq tool-calling agent with a small, allow-listed server toolset. The agent can retrieve the selected field, read the deterministic evaluation, create its linked evidence record, and request an idempotent simulated payout record. The server, not the model, controls the database, rule values, payout band, and amount. The agent can only explain the result after the fixed policy engine has calculated it. Groq documents this local function-calling pattern, in which the application executes the tools and returns the results to the model.[1]
+> **Safety boundary:** AgriGuard does not sell insurance, issue a policy, approve a real claim, or transfer money. Every payout, status, and ledger entry is simulated.
 
-| Layer | Responsibility | Trust boundary |
-|---|---|---|
-| Temperature adapter | Returns normalized hourly readings with a source label. | The primary demo reads a verified historical FortyGuard window for a public Fresno County wheat field; synthetic data remains an explicit judge-demo fallback. |
-| Policy engine | Applies the fixed heat rule and payout bands. | Pure TypeScript; no LLM call. |
-| Monitoring agent | Calls only server-defined tools and writes an explanation. | Cannot change the rule, source data, stage, band, or amount. |
-| Supabase Postgres | Stores fields, policies, observations, evaluations, evidence, payouts, and audit entries. | Server uses the secret key; the browser never receives it. |
-| Operational UI | Shows the portfolio, field evidence, and simulated ledger. | Source and simulation labels remain visible. |
+## The problem
 
-## Deterministic policy rule
+Heat can damage wheat within hours. A parametric policy needs more than a chart. It needs a clear source, a fixed rule, a recorded result, and an explanation that a reviewer can inspect.
 
-The engine is the source of truth. This is a hackathon demonstration rule, not an insurance contract.
+AgriGuard keeps these parts together. The system shows what it observed, which rule it applied, why the event triggered, and why the agent did not control the payout.
 
-| Rule | Fixed value |
-|---|---|
-| Crop | Wheat only |
+## Live judge demo
+
+The live site has a public landing page and an operational demo.
+
+| Open | What it proves |
+| --- | --- |
+| [Landing page](https://agriguard-eta.vercel.app) | The product problem, policy concept, and transparent design. |
+| [`/app`](https://agriguard-eta.vercel.app/app) | Portfolio view, source labels, map, and monitoring flow. |
+| [Verified evidence](https://agriguard-eta.vercel.app/app/evidence/LIVE-FRESNO-2024071514) | A stored FortyGuard historical event for the public Fresno wheat demo boundary. |
+| [Ledger](https://agriguard-eta.vercel.app/app/ledger) | The idempotent simulated payout record. |
+
+### Recommended 75-second flow
+
+1. Open the portfolio. Point out the verified FortyGuard source label.
+2. Open the Fresno field. Show the three continuous readings above the fixed 34 °C threshold.
+3. Open the verified evidence record. Read the **observed → rule → recorded** decision chain.
+4. Open the ledger. Point out the single 25% simulated payout record.
+5. State the boundary: the agent explains the result, but cannot change the policy rule or amount.
+
+## Verified event
+
+The primary demo uses a public California Department of Water Resources 2023 crop-map polygon in Fresno County. It is a demonstration boundary, not a legal insured field boundary.
+
+| UTC hour on 15 July 2024 | Field mean temperature |
+| --- | ---: |
+| 12:00 | 35.2 °C |
+| 13:00 | 36.3 °C |
+| 14:00 | 37.7 °C |
+
+These three continuous readings meet the demo policy rule. The engine records a **25% simulated payout band** and a **$6,250 simulated amount**. The evidence record code is `LIVE-FRESNO-2024071514`.
+
+## Fixed policy rule
+
+The policy engine is the source of truth. This rule is for the hackathon prototype. It is not an insurance contract.
+
+| Rule | Value |
+| --- | --- |
+| Crop | Wheat |
 | Eligible stages | `flowering` and `grain_filling` |
-| Temperature threshold | **34 °C or above** |
-| Reading interval | One normalized reading per hour |
-| Event break | Below-threshold reading, missing hourly reading, stale data, or ineligible stage |
-| Trigger condition | At least **three continuous qualifying hours** |
+| Threshold | 34 °C or higher |
+| Trigger | Three continuous qualifying hourly readings |
 | 25% band | Three or four continuous hours |
 | 50% band | Five or six continuous hours |
 | 100% band | Seven or more continuous hours |
-| Heat score | Sum of `max(0, temperatureC - 34)` across the longest qualifying event |
+| Missing or stale data | `Data unavailable`; no payout |
 
-The approved North Field scenario contains five qualifying hours. It therefore produces a **50% simulated payout band**, a **11.8 degree-hour** heat score, and a fixed **$12,500 simulated amount**.
+## Why this is Agentic AI
 
-## Product surfaces
+The agent uses a small allow-listed toolset. It can retrieve a field, read a completed policy evaluation, create linked evidence, and write an explanation. The server controls the data writes, policy values, payout band, and amount.
 
-AgriGuard has two deliberate surfaces.
+| Layer | Responsibility | Agent boundary |
+| --- | --- | --- |
+| FortyGuard adapter | Normalizes hourly temperature observations. | The agent cannot alter observations. |
+| Policy engine | Applies the fixed heat rule and payout bands. | No LLM call. |
+| Groq explanation agent | Retrieves and explains recorded evidence. | Cannot change the rule, stage, band, or amount. |
+| Supabase Postgres | Stores fields, observations, evidence, payouts, and audit entries. | Server-only writes. |
+| Operational UI | Shows sources, evidence, and simulation labels. | Every payout stays simulated. |
 
-| Route | Purpose |
-|---|---|
-| `/` | Animated landing page that explains the policy, evidence trail, and Agentic-track value. |
-| `/app` | Portfolio dashboard with Leaflet and OpenStreetMap field map, field states, and a judge demo control. |
-| `/app/fields/north` | Deterministic temperature and heat-score charts with a visible 34 °C threshold. |
-| `/app/evidence/:code` | Structured event evidence, qualifying observations, policy values, source label, and agent explanation. |
-| `/app/ledger` | Idempotent simulated payout ledger with a permanent simulation disclaimer. |
+If Groq is unavailable, AgriGuard writes a stable template explanation. The deterministic policy and evidence path remain available.
 
-## Judge demo flow
-
-The complete demo is designed to take less than three minutes.
-
-1. Open `/app` and point out the visible **Synthetic demo data** label and the four field states.
-2. Select **Run scenario** for North Field. The interface shows observe, apply, and record states through the agent-status panel.
-3. The server loads fixed synthetic readings, applies the deterministic rule, writes the evaluation and evidence record, and requests one idempotent simulated payout.
-4. Open the evidence record to inspect the five qualifying readings, 34 °C threshold, exposure time, heat score, policy version, source label, and explanation.
-5. Open the simulated ledger. Re-running the scenario returns the same payout key and does not create a duplicate ledger row.
-
-## Data sources and fallback behavior
-
-The primary FortyGuard demonstration uses a public California Department of Water Resources 2023 crop-map polygon for a Fresno County wheat field. It retrieves a verified three-hour historical window from 15 July 2024, normalizes the returned hourly field-mean temperatures, and evaluates it through the same deterministic policy engine. The public boundary is clearly a demo configuration, not an insured farmer’s legal field boundary.
-
-The separate judge-demo control remains synthetic by design. It gives judges a fast, repeatable five-hour heat-wave scenario even if the external API is slow or unavailable, and all synthetic views remain visibly labelled.
-
-The Groq explanation path is intentionally optional for the decision. If Groq is rate-limited, unavailable, or returns invalid structured content, AgriGuard writes a template explanation with the same stable shape. The demo remains operational because the policy engine and storage path do not depend on model output.
-
-| Condition | Product response |
-|---|---|
-| Missing hourly observation | `Data unavailable`; no payout. |
-| Stale reading | `Data unavailable`; no payout. |
-| Ineligible crop stage | Safe result; no payout. |
-| Groq failure | Template explanation; deterministic result remains unchanged. |
-| Repeat scenario request | Existing evidence and payout are returned; no duplicate payout row. |
-| FortyGuard API unavailable or returns no cells | No live policy result is created; the clearly labelled synthetic judge demo remains available. |
-
-## Stack
+## Technical stack
 
 | Area | Technology |
-|---|---|
+| --- | --- |
 | Client | React 19, TypeScript, Vite, Tailwind CSS, Wouter |
-| Server | Express, tRPC, Zod |
-| Data | Supabase Postgres with RLS enabled tables |
-| Maps and charts | Leaflet + OpenStreetMap, Recharts |
+| Server | Express, tRPC, Zod, Vercel serverless entry |
+| Data | Supabase Postgres with RLS-enabled tables |
+| Weather intelligence | FortyGuard heatmap API |
+| Agent | Groq local function calling with a controlled toolset |
+| Maps and charts | Leaflet, OpenStreetMap, Recharts |
 | Motion | Framer Motion, GSAP, Lenis |
-| Visual system | Magic UI Globe, branded CSS system, light and dark themes |
-| Agent | Groq Chat Completions local function calling with a template fallback |
 
-## Database schema
+## Project structure
 
-The `supabase/migrations/0001_agri_guard_schema.sql` migration creates the following RLS-enabled records in the `agri-guard` project: `fields`, `policies`, `temperature_observations`, `heat_evaluations`, `evidence_records`, `payout_events`, and `audit_entries`.
+```text
+client/src/pages/                 Landing, portfolio, field, evidence, and ledger routes
+client/src/components/            Reusable product components
+server/services/policy-engine.ts  Deterministic heat policy logic
+server/services/temperature-adapter.ts
+                                 Synthetic and FortyGuard observation adapter
+server/services/monitoring-agent.ts
+                                 Controlled Groq explanation flow and template fallback
+server/services/monitoring-service.ts
+                                 Evidence, ledger, and idempotency workflow
+supabase/migrations/              Versioned Postgres schema
+docs/ARCHITECTURE.md               System architecture
+docs/HACKATHON_JUDGE_DEMO.md       Judge demo script and backup recording runbook
+docs/VERCEL_DEPLOYMENT.md          Vercel configuration reference
+```
 
-Duplicate prevention has two layers. The policy engine creates a stable event key from the field, policy, and qualifying time window. Supabase enforces unique `run_key`, `evaluation_id`, and `payout_key` constraints so a repeat scenario returns the existing simulated payout rather than creating another record.
+## Run locally
 
-## Local setup
-
-Install dependencies and start the development server.
+Install the dependencies.
 
 ```bash
 pnpm install
+```
+
+Set the required environment variables. Do not commit a `.env` file.
+
+| Variable | Purpose |
+| --- | --- |
+| `VITE_SUPABASE_URL` | Supabase project URL. |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase key. |
+| `SUPABASE_SECRET_KEY` | Server-only Supabase key. |
+| `FORTYGUARD_API_KEY` | Server-only key for the verified history flow. |
+| `GROQ_API_KEY` | Server-only key for the controlled explanation agent. |
+| `JWT_SECRET` | Server-only session secret. |
+
+Start the development server.
+
+```bash
 pnpm dev
 ```
 
-Set the following project environment variables. Do not commit a local `.env` file.
-
-| Variable | Purpose | Required |
-|---|---|---|
-| `VITE_SUPABASE_URL` | Supabase project root URL or REST URL. The client normalizes either form. | Yes |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Browser-safe Supabase publishable key. | Yes |
-| `SUPABASE_SECRET_KEY` | Server-only key for controlled writes and RLS bypass. | Yes |
-| `GROQ_API_KEY` | Server-only key for the controlled explanation agent. | Recommended; a template fallback exists. |
-| `FORTYGUARD_API_KEY` | Server-only authenticated access for verified FortyGuard heatmap requests. | Required for the verified-history demo; synthetic judge demo remains available without it. |
-
-Run the project checks before a demo or pull request.
+Run the project checks before a demo.
 
 ```bash
 pnpm check
@@ -119,54 +138,24 @@ pnpm test
 pnpm build
 ```
 
-The test suite includes policy-rule tests, missing-data checks, template-explanation shape checks, Supabase and Groq credential health checks, and a persisted scenario test that verifies payout idempotency.
+## Deploy on Vercel
 
-## Repository map
+The live deployment uses `vercel.json` and the serverless entry in `api/[...path].ts`.
+
+Set these values in Vercel for Production, Preview, and Development:
 
 ```text
-client/src/pages/                 Landing and operational routes
-client/src/components/            Shared map, shell, agent-status, and interaction components
-client/src/contexts/              Monitoring state and theme state
-client/src/lib/supabase.ts        Browser-safe publishable-key client
-server/services/policy-engine.ts  Pure deterministic heat policy engine
-server/services/temperature-adapter.ts
-                                 Swappable synthetic and FortyGuard adapter boundary
-server/services/monitoring-agent.ts
-                                 Controlled Groq local-function orchestration and fallback report
-server/services/monitoring-service.ts
-                                 Supabase-backed scenario, evidence, ledger, and idempotency flow
-server/supabase.ts                Server-only Supabase client
-supabase/migrations/              Versioned Postgres schema
-docs/                             PRD, architecture, visual direction, and asset records
+VITE_DEPLOYMENT_TARGET=vercel
+VITE_LANDING_VIDEO_URL=https://files.manuscdn.com/user_upload_by_module/session_file/310519663854899853/FJCxiYqDYSKMjHnl.mp4
+VITE_LANDING_POSTER_URL=https://files.manuscdn.com/user_upload_by_module/session_file/310519663854899853/tJemZdmPnpbxvkMV.jpg
 ```
 
-The detailed implementation plan is intentionally maintained outside this public repository.
-
-## Vercel deployment handoff
-
-The production build passes with the standard Vite command shown below. The app is an Express server with a Vite client build, so deploy it as a Node application rather than as a static-export-only site.
-
-| Vercel setting | Value |
-|---|---|
-| Framework preset | Other / Node.js |
-| Install command | `pnpm install --frozen-lockfile` |
-| Build command | `pnpm build` |
-| Start command | `pnpm start` |
-| Node.js version | 22.x |
-| Output directory | Leave unset; the server serves `dist/public` |
-
-Add the following variables to the Vercel project before a deployment. They must be configured in Vercel, not committed to the repository.
-
-| Variable | Deployment requirement |
-|---|---|
-| `VITE_SUPABASE_URL` | Required in both preview and production builds. |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | Required in both preview and production builds. |
-| `SUPABASE_SECRET_KEY` | Required server-side at runtime. Never prefix it with `VITE_`. |
-| `GROQ_API_KEY` | Recommended server-side at runtime. The deterministic template fallback remains available if it is omitted or rate-limited. |
-| `FORTYGUARD_API_KEY` | Required server-side for the verified Fresno County history demo. Never prefix it with `VITE_`. |
-
-> **Hackathon deployment state:** the public demo includes two clearly separated flows: a repeatable synthetic judge scenario and a verified FortyGuard historical California wheat-field flow. Every payout is simulated; the live-data evidence route shows its source and observation timestamps.
+Then set the required server and Supabase variables from the local-setup table. Read [`docs/VERCEL_DEPLOYMENT.md`](docs/VERCEL_DEPLOYMENT.md) for the full deployment reference.
 
 ## References
 
-[1]: https://console.groq.com/docs/tool-use/local-tool-calling "Groq Local Tool Calling"
+[1] [FortyGuard API documentation](https://docs-api.fortyguard.com/docs/quickstart)
+
+[2] [Groq local tool calling](https://console.groq.com/docs/tool-use/local-tool-calling)
+
+[3] [California Statewide Crop Mapping](https://www.water.ca.gov/Programs/All-Programs/California-Statewide-Crop-Mapping)
