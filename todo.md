@@ -80,6 +80,7 @@
 - [x] Bundle the serverless API application explicitly for Vercel so the deployed function no longer imports an absent TypeScript module at runtime.
 - [x] Add regression coverage for the Vercel API build artifact and deployment configuration.
 - [x] Add a durable automated smoke test that builds and imports the Vercel serverless API artifact within the repository validation flow.
+- [ ] Ensure the README Live Demo button opens the canonical Vercel URL in a new browser tab or window.
 - [x] Add the Supabase Postgres schema for fields, policies, observations, evaluations, evidence records, payout events, and audit entries after schema approval.
 - [x] Enforce duplicate payout prevention in the database and policy engine.
 - [x] Add missing or stale-data handling, including a Data unavailable state.
