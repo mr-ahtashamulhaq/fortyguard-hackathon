@@ -1,6 +1,10 @@
-# AgriGuard
+# **AgriGuard**
+
+![AgriGuard Landing Page](./landing-page.png)
+
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20AgriGuard-1f6f50?style=for-the-badge)](https://agriguard-eta.vercel.app)
+[![YouTube Demo](https://img.shields.io/badge/YouTube%20Demo-Watch%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://youtu.be/nXp_dO9e8i4?si=zucR_qKaC3-l0Gak)
 [![FortyGuard Hackathon 2026](https://img.shields.io/badge/FortyGuard%20Hackathon-2026-0d3428?style=for-the-badge)](https://www.fortyguard.com/hackathon26)
 [![Track](https://img.shields.io/badge/Track-Agentic%20(API%20%2B%20Agentic)-d97706?style=for-the-badge)](https://www.fortyguard.com/hackathon26)
 
@@ -8,7 +12,6 @@
 
 The project was built for the **FortyGuard Global AI Hackathon 2026**. It is submitted to the **Agentic (API + Agentic)** track.
 
-**Live demo:** [agriguard-eta.vercel.app](https://agriguard-eta.vercel.app)
 
 > **Scope:** AgriGuard is a hackathon prototype. It does not sell insurance, issue a policy, approve a claim, or transfer money. Every payout, status, and ledger entry is simulated.
 
@@ -139,17 +142,3 @@ docs/ARCHITECTURE.md               System architecture reference
 docs/HACKATHON_JUDGE_DEMO.md       Judge demonstration script
 docs/VERCEL_DEPLOYMENT.md          Deployment reference
 ```
-
-## Safety and transparency
-
-AgriGuard makes its demonstration limits visible in the interface and records. The Fresno crop boundary is public and demonstrative. All payout amounts are simulated. The synthetic scenario is a labelled fallback for a stable presentation when an external API is unavailable.
-
-The prototype does not make underwriting decisions or represent a real insurance policy. It demonstrates how a transparent, evidence-first parametric workflow can support later human or institutional review.
-
-## References
-
-[1] [California Statewide Crop Mapping](https://www.water.ca.gov/Programs/All-Programs/California-Statewide-Crop-Mapping)
-
-[2] [Groq local tool calling](https://console.groq.com/docs/tool-use/local-tool-calling)
-
-[3] [FortyGuard API documentation](https://docs-api.fortyguard.com/docs/quickstart)
